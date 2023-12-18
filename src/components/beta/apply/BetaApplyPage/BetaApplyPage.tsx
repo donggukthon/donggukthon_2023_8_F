@@ -148,11 +148,11 @@ export const BetaApplyPage: FC<BetaApplyPageProps> = ({ className }) => {
             <Space height={40} />
             <Column width={'100%'}>
               <Font type={['heading-12-medium', 'heading-14-medium']} color={'gray.800'}>
-                이름/전화번호를 입력해주세요. (예시: 홍길동/010-1234-1234)
+                이름/사용할 이메일을 입력해주세요. (예시: 홍길동/010-1234-1234)
               </Font>
               <Space height={10} />
               <ResponsiveTextInput
-                placeholder={'이름/전화번호를 입력해주세요.'}
+                placeholder={'이름/사용할 이메일을 입력해주세요.'}
                 value={question1}
                 onChange={(e) => setQuestion1(e.target.value)}
                 name="question_1"
