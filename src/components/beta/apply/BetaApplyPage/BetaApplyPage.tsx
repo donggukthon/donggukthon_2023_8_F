@@ -148,7 +148,7 @@ export const BetaApplyPage: FC<BetaApplyPageProps> = ({ className }) => {
             <Space height={40} />
             <Column width={'100%'}>
               <Font type={['heading-12-medium', 'heading-14-medium']} color={'gray.800'}>
-                이름/사용할 이메일을 입력해주세요. (예시: 홍길동/010-1234-1234)
+                이름/사용할 이메일을 입력해주세요. (예시: 홍길동/my3dtree1234@gmail.com)
               </Font>
               <Space height={10} />
               <ResponsiveTextInput
