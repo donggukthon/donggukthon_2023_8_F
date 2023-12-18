@@ -21,7 +21,7 @@ const TermsPage: NextPage<TermsPageProps> = () => (
     <Paper bgColor={'temp.#DACDC3'}>
       <Column maxWidth={[MOBILE_ROOT_MAX_WIDTH, '100%']} minHeight={`100vh`} pb={FOOTER_HEIGHT} mx={'auto'}>
         <MetaTags />
-        <Header />
+        <Header title={'이용 약관'} />
         <Space height={HEADER_HEIGHT} />
         <TermsPageComponent />
         <Footer />
