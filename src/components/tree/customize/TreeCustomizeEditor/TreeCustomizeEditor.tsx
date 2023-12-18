@@ -12,6 +12,11 @@ import { AutoRotateSwitch } from '@components/tree/AutoRotateSwitch'
 import styled from '@emotion/styled'
 import { useBooleanState } from '@hooks/useBooleanState'
 import { Slider } from 'antd'
+import decorationIcon1Img from 'public/images/decoration_icon_1.png'
+import decorationIcon2Img from 'public/images/decoration_icon_2.png'
+import decorationIcon4Img from 'public/images/decoration_icon_4.png'
+import decorationIcon5Img from 'public/images/decoration_icon_5.png'
+import decorationIcon6Img from 'public/images/decoration_icon_6.png'
 import { FC, useEffect, useState } from 'react'
 import { DecorationTypeType, getIndexByDecorationType } from './utils'
 
@@ -39,6 +44,20 @@ const decorationFileList = [
       {
         url: '/models/tree_4.glb',
         previewUrl: '/images/tree_4.jpeg',
+      },
+    ],
+  },
+  {
+    label: '종',
+    decorationType: 'DECORATION_6',
+    fileList: [
+      {
+        url: '/models/decoration_6_1.glb',
+        previewUrl: '/images/decoration_6_1.jpeg',
+      },
+      {
+        url: '/models/decoration_6_2.glb',
+        previewUrl: '/images/decoration_6_2.jpeg',
       },
     ],
   },
@@ -98,6 +117,8 @@ const decorationFileList = [
   },
 ]
 
+const DEFAULT_POSITION = [0, 0.2, -0.4]
+
 // 4: 팔찌, 5: 지팡이, 6: 종, 7: 선물상자, 8: 별
 
 const DEFAULT_DATA = [
@@ -115,38 +136,9 @@ const DEFAULT_DATA = [
       {
         decorationType: 'DECORATION_5',
         url: '/models/decoration_5_2.glb',
-        position: [0, 0, 0.15],
+        position: DEFAULT_POSITION,
         scale: [0.1, 0.1, 0.1],
         rotate: [0.2, 0.3, 0.4],
-        type: 'GLB',
-      },
-      {
-        decorationType: 'DECORATION_7',
-        url: '/models/decoration_7_1.glb',
-        position: [0, 0.2, -0.15],
-        scale: [0.3, 0.3, 0.3],
-        rotate: [0.2, 0.3, 0.4],
-        type: 'GLB',
-      },
-      {
-        decorationType: 'DECORATION_8',
-        url: '/models/decoration_8_1.glb',
-        position: [0, 0.4, 0],
-        scale: [0.3, 0.3, 0.3],
-        type: 'GLB',
-      },
-      {
-        decorationType: 'DECORATION_8',
-        url: '/models/decoration_8_1.glb',
-        position: [0, 0.2, -0.15],
-        scale: [0.3, 0.3, 0.3],
-        type: 'GLB',
-      },
-      {
-        decorationType: 'DECORATION_8',
-        url: '/models/decoration_8_1.glb',
-        position: [0, 0.2, -0.4],
-        scale: [0.3, 0.3, 0.3],
         type: 'GLB',
       },
     ],
@@ -154,6 +146,9 @@ const DEFAULT_DATA = [
 ]
 
 type DirectionType = 'RESET' | 'RIGHT' | 'LEFT' | 'OPPOSITE'
+
+const DECORATION_ICON_DIVIDE_RATIO = 3
+const DECORATION_BUTTON_WIDTH = 60
 
 export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className }) => {
   const { showAlarmToast } = useToast()
@@ -167,22 +162,6 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
   }
 
   const onClickSelectedDecoration = (value: DecorationTypeType) => () => {
-    _setTestTreeList((prev) => {
-      const newPosition = [
-        DEFAULT_DATA[0].decorationList[selectedDecorationIndex].position[0],
-        DEFAULT_DATA[0].decorationList[selectedDecorationIndex].position[1],
-        DEFAULT_DATA[0].decorationList[selectedDecorationIndex].position[2],
-      ]
-      const newDecorationList = prev[0].decorationList.map((value2, index2) =>
-        selectedDecorationIndex === index2 ? { ...value2, decorationType: value, position: newPosition } : { ...value2 }
-      ) as any
-      return [
-        {
-          ...prev[0],
-          decorationList: newDecorationList,
-        },
-      ]
-    })
     setSelectedDecorationType(value)
   }
 
@@ -205,11 +184,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
   const onClickPosition = (index: number, direction: DirectionType) => () => {
     if (direction === 'RESET') {
       _setTestTreeList((prev) => {
-        const newPosition = [
-          DEFAULT_DATA[0].decorationList[index].position[0],
-          DEFAULT_DATA[0].decorationList[index].position[1],
-          DEFAULT_DATA[0].decorationList[index].position[2],
-        ]
+        const newPosition = [DEFAULT_POSITION[0], DEFAULT_POSITION[1], DEFAULT_POSITION[2]]
         const newDecorationList = prev[0].decorationList.map((value2, index2) =>
           index === index2 ? { ...value2, position: [...newPosition] } : { ...value2 }
         ) as any
@@ -224,11 +199,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
     }
     if (direction === 'RIGHT') {
       _setTestTreeList((prev) => {
-        const newPosition = [
-          DEFAULT_DATA[0].decorationList[index].position[2],
-          DEFAULT_DATA[0].decorationList[index].position[1],
-          DEFAULT_DATA[0].decorationList[index].position[0],
-        ]
+        const newPosition = [DEFAULT_POSITION[2], DEFAULT_POSITION[1], DEFAULT_POSITION[0]]
         const newDecorationList = prev[0].decorationList.map((value2, index2) =>
           index === index2 ? { ...value2, position: [...newPosition] } : { ...value2 }
         ) as any
@@ -243,11 +214,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
     }
     if (direction === 'LEFT') {
       _setTestTreeList((prev) => {
-        const newPosition = [
-          -1 * DEFAULT_DATA[0].decorationList[index].position[2],
-          DEFAULT_DATA[0].decorationList[index].position[1],
-          DEFAULT_DATA[0].decorationList[index].position[0],
-        ]
+        const newPosition = [-1 * DEFAULT_POSITION[2], DEFAULT_POSITION[1], DEFAULT_POSITION[0]]
         const newDecorationList = prev[0].decorationList.map((value2, index2) =>
           index === index2 ? { ...value2, position: [...newPosition] } : { ...value2 }
         ) as any
@@ -262,11 +229,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
     }
     if (direction === 'OPPOSITE') {
       _setTestTreeList((prev) => {
-        const newPosition = [
-          DEFAULT_DATA[0].decorationList[index].position[0],
-          DEFAULT_DATA[0].decorationList[index].position[1],
-          -1 * DEFAULT_DATA[0].decorationList[index].position[2],
-        ]
+        const newPosition = [DEFAULT_POSITION[0], DEFAULT_POSITION[1], -1 * DEFAULT_POSITION[2]]
         const newDecorationList = prev[0].decorationList.map((value2, index2) =>
           index === index2 ? { ...value2, position: [...newPosition] } : { ...value2 }
         ) as any
@@ -309,7 +272,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
         {
           decorationType: 'DECORATION_5',
           url: '/models/decoration_5_2.glb',
-          position: [0, 0, 0.15],
+          position: DEFAULT_POSITION,
           scale: [0.2, 0.2, 0.2],
           rotate: [0.2, 0.3, 0.4],
           type: 'GLB',
@@ -345,7 +308,8 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
     setSelectedDecorationType(
       testTreeList[0].decorationList[selectedDecorationIndex].decorationType as DecorationTypeType
     )
-  }, [selectedDecorationIndex, testTreeList])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedDecorationIndex])
 
   return (
     <StyledPaper>
@@ -391,20 +355,22 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
                         </Row>
                       </Paper>
                     ))}
-                    <Paper bgColor={'white'} borderColor={'temp.#475482'} radius={16}>
-                      <Row
-                        width={[24, 32]}
-                        height={[24, 32]}
-                        justify={'center'}
-                        align={'center'}
-                        onClick={onClickCreateButton}
-                        cursor={'pointer'}
-                      >
-                        <Font type={['btn-12-bold', 'btn-16-bold']} color={'temp.#475482'}>
-                          +
-                        </Font>
-                      </Row>
-                    </Paper>
+                    {testTreeList[0].decorationList.length < 6 && (
+                      <Paper bgColor={'white'} borderColor={'temp.#475482'} radius={16}>
+                        <Row
+                          width={[24, 32]}
+                          height={[24, 32]}
+                          justify={'center'}
+                          align={'center'}
+                          onClick={onClickCreateButton}
+                          cursor={'pointer'}
+                        >
+                          <Font type={['btn-12-bold', 'btn-16-bold']} color={'temp.#475482'}>
+                            +
+                          </Font>
+                        </Row>
+                      </Paper>
+                    )}
                   </Row>
                 </Row>
                 <Space height={30} />
@@ -416,36 +382,122 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
                   </Row>
                   <Row gap={10} align={'center'}>
                     {selectedDecorationIndex === 0 ? (
-                      <ContainedButton
-                        kind={selectedDecorationType === 'TREE' ? 'cta' : 'secondary-accent'}
-                        size={'sm'}
-                        onClick={onClickSelectedDecoration('TREE')}
-                      >
-                        트리
-                      </ContainedButton>
+                      <Paper radius={60} borderColor={'gray.200'}>
+                        <Row
+                          width={DECORATION_BUTTON_WIDTH}
+                          height={DECORATION_BUTTON_WIDTH}
+                          justify={'center'}
+                          align={'center'}
+                          p={10}
+                          cursor={'pointer'}
+                          onClick={onClickSelectedDecoration('TREE')}
+                        >
+                          <Image
+                            src={decorationIcon1Img}
+                            alt={'decoration icon 1 image'}
+                            width={69 / DECORATION_ICON_DIVIDE_RATIO}
+                            height={150 / DECORATION_ICON_DIVIDE_RATIO}
+                            background={false}
+                          />
+                        </Row>
+                      </Paper>
                     ) : (
-                      <Row gap={10} align={'center'}>
-                        <ContainedButton
-                          kind={selectedDecorationType === 'DECORATION_5' ? 'cta' : 'secondary-accent'}
-                          size={'sm'}
-                          onClick={onClickSelectedDecoration('DECORATION_5')}
-                        >
-                          지팡이
-                        </ContainedButton>
-                        <ContainedButton
-                          kind={selectedDecorationType === 'DECORATION_7' ? 'cta' : 'secondary-accent'}
-                          size={'sm'}
-                          onClick={onClickSelectedDecoration('DECORATION_7')}
-                        >
-                          선물상자
-                        </ContainedButton>
-                        <ContainedButton
-                          kind={selectedDecorationType === 'DECORATION_8' ? 'cta' : 'secondary-accent'}
-                          size={'sm'}
-                          onClick={onClickSelectedDecoration('DECORATION_8')}
-                        >
-                          별
-                        </ContainedButton>
+                      <Row gap={10} align={'center'} wrap={'wrap'}>
+                        <Paper radius={60} borderColor={'gray.200'}>
+                          <Row
+                            width={DECORATION_BUTTON_WIDTH}
+                            height={DECORATION_BUTTON_WIDTH}
+                            justify={'center'}
+                            align={'center'}
+                            p={10}
+                            cursor={'pointer'}
+                            onClick={onClickSelectedDecoration('DECORATION_6')}
+                          >
+                            <Image
+                              src={decorationIcon2Img}
+                              alt={'decoration icon 2 image'}
+                              width={119 / DECORATION_ICON_DIVIDE_RATIO}
+                              height={120 / DECORATION_ICON_DIVIDE_RATIO}
+                              background={false}
+                            />
+                          </Row>
+                        </Paper>
+                        {/* <Paper radius={60} borderColor={'gray.200'}>
+                          <Row
+                            width={DECORATION_BUTTON_WIDTH}
+                            height={DECORATION_BUTTON_WIDTH}
+                            justify={'center'}
+                            align={'center'}
+                            p={10}
+                            cursor={'pointer'}
+                            onClick={onClickSelectedDecoration('DECORATION_5')}
+                          >
+                            <Image
+                              src={decorationIcon3Img}
+                              alt={'decoration icon 3 image'}
+                              width={123 / DECORATION_ICON_DIVIDE_RATIO}
+                              height={120 / DECORATION_ICON_DIVIDE_RATIO}
+                              background={false}
+                            />
+                          </Row>
+                        </Paper> */}
+                        <Paper radius={60} borderColor={'gray.200'}>
+                          <Row
+                            width={DECORATION_BUTTON_WIDTH}
+                            height={DECORATION_BUTTON_WIDTH}
+                            justify={'center'}
+                            align={'center'}
+                            p={10}
+                            cursor={'pointer'}
+                            onClick={onClickSelectedDecoration('DECORATION_7')}
+                          >
+                            <Image
+                              src={decorationIcon4Img}
+                              alt={'decoration icon 4 image'}
+                              width={62 / DECORATION_ICON_DIVIDE_RATIO}
+                              height={130 / DECORATION_ICON_DIVIDE_RATIO}
+                              background={false}
+                            />
+                          </Row>
+                        </Paper>
+                        <Paper radius={60} borderColor={'gray.200'}>
+                          <Row
+                            width={DECORATION_BUTTON_WIDTH}
+                            height={DECORATION_BUTTON_WIDTH}
+                            justify={'center'}
+                            align={'center'}
+                            p={10}
+                            cursor={'pointer'}
+                            onClick={onClickSelectedDecoration('DECORATION_5')}
+                          >
+                            <Image
+                              src={decorationIcon5Img}
+                              alt={'decoration icon 5 image'}
+                              width={94 / DECORATION_ICON_DIVIDE_RATIO}
+                              height={128 / DECORATION_ICON_DIVIDE_RATIO}
+                              background={false}
+                            />
+                          </Row>
+                        </Paper>
+                        <Paper radius={60} borderColor={'gray.200'}>
+                          <Row
+                            width={DECORATION_BUTTON_WIDTH}
+                            height={DECORATION_BUTTON_WIDTH}
+                            justify={'center'}
+                            align={'center'}
+                            p={10}
+                            cursor={'pointer'}
+                            onClick={onClickSelectedDecoration('DECORATION_8')}
+                          >
+                            <Image
+                              src={decorationIcon6Img}
+                              alt={'decoration icon 6 image'}
+                              width={88 / DECORATION_ICON_DIVIDE_RATIO}
+                              height={100 / DECORATION_ICON_DIVIDE_RATIO}
+                              background={false}
+                            />
+                          </Row>
+                        </Paper>
                       </Row>
                     )}
                   </Row>
@@ -477,23 +529,25 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
                   ))}
                 </Row>
                 <Space height={[20, 30]} />
-                <Row gap={20} align={'center'}>
-                  <Row width={30}>
-                    <Font type={['heading-12-medium', 'heading-14-medium']} color={'gray.800'} wordBreak={'keep-all'}>
-                      크기
-                    </Font>
+                {selectedDecorationType !== 'TREE' && (
+                  <Row gap={20} align={'center'}>
+                    <Row width={30}>
+                      <Font type={['heading-12-medium', 'heading-14-medium']} color={'gray.800'} wordBreak={'keep-all'}>
+                        크기
+                      </Font>
+                    </Row>
+                    <Slider
+                      style={{ width: 200, marginTop: 5, marginBottom: 5 }}
+                      min={0.1}
+                      max={1}
+                      value={selectedDecorationItem.scale[0]}
+                      onChange={onChangeSlider(selectedDecorationIndex)}
+                      step={0.01}
+                    />
                   </Row>
-                  <Slider
-                    style={{ width: 200, marginTop: 5, marginBottom: 5 }}
-                    min={0.1}
-                    max={1}
-                    value={selectedDecorationItem.scale[0]}
-                    onChange={onChangeSlider(selectedDecorationIndex)}
-                    step={0.01}
-                  />
-                </Row>
+                )}
                 <Space height={[5, 15]} />
-                {selectedDecorationType && (
+                {selectedDecorationType !== 'TREE' && (
                   <Row gap={20} align={'center'}>
                     <Row width={30}>
                       <Font type={['heading-12-medium', 'heading-14-medium']} color={'gray.800'} wordBreak={'keep-all'}>

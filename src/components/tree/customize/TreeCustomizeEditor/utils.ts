@@ -1,4 +1,4 @@
-export type DecorationTypeType = 'TREE' | 'DECORATION_5' | 'DECORATION_7' | 'DECORATION_8'
+export type DecorationTypeType = 'TREE' | 'DECORATION_5' | 'DECORATION_7' | 'DECORATION_8' | 'DECORATION_6'
 
 export const getIndexByDecorationType = (value: DecorationTypeType) => {
   if (value === 'TREE') {
@@ -9,6 +9,9 @@ export const getIndexByDecorationType = (value: DecorationTypeType) => {
   }
   if (value === 'DECORATION_7') {
     return 2
+  }
+  if (value === 'DECORATION_8') {
+    return 4
   }
 
   return 3
