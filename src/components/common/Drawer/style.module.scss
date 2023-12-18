@@ -1,0 +1,73 @@
+@use '@styles/animations' as *;
+
+$animation-duration: 0.3s;
+
+.drawer {
+  .drawer-content {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    background-color: white;
+
+    animation-name: none;
+    animation-duration: $animation-duration;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+
+    &.left {
+      left: 0;
+    }
+
+    &.right {
+      right: 0;
+    }
+  }
+
+  .dimmer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    animation-name: none;
+    animation-duration: $animation-duration;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+  }
+
+  &.open {
+    .drawer-content {
+      &.left {
+        @include slide-animation(-100%, 0, 0, 0);
+      }
+
+      &.right {
+        @include slide-animation(100%, 0, 0, 0);
+      }
+    }
+
+    .dimmer {
+      @include fade-animation(0, 1);
+    }
+  }
+
+  &.close {
+    .drawer-content {
+      &.left {
+        @include slide-animation(0, 0, -100%, 0);
+      }
+
+      &.right {
+        right: 0;
+        @include slide-animation(0, 0, 100%, 0);
+      }
+    }
+
+    .dimmer {
+      @include fade-animation(1, 0);
+    }
+  }
+}

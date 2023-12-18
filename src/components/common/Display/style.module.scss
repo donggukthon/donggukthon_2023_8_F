@@ -1,0 +1,17 @@
+@use '@styles/definitions' as *;
+
+.mobile {
+  &:not(.desktop) {
+    @include desktop {
+      display: none;
+    }
+  }
+}
+
+.desktop {
+  &:not(.mobile) {
+    @include mobile {
+      display: none;
+    }
+  }
+}

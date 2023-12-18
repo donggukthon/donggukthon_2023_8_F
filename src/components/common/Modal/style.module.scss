@@ -1,0 +1,11 @@
+@use '@styles/definitions' as *;
+
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  max-height: 80vh;
+}
+
+.dimmer {
+  background-color: rgba(0, 0, 0, 0.5);
+}

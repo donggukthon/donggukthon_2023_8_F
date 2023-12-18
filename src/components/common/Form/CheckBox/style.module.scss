@@ -1,0 +1,48 @@
+@use '@styles/definitions' as *;
+
+.check-box {
+  @include custom-flex(center, center);
+  border-radius: 2px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+
+  border: 2px solid $color-gray-500;
+  background-color: $color-white;
+
+  .icon {
+    visibility: hidden;
+  }
+
+  &:hover {
+    border-color: $color-gray-600;
+  }
+
+  &.disabled {
+    border-color: $color-gray-300;
+    background-color: $color-gray-200;
+  }
+
+  &.checked {
+    border-color: $color-primary-accent;
+    background-color: $color-primary-accent;
+
+    .icon {
+      visibility: visible;
+    }
+
+    &:hover {
+      border-color: #008b83;
+      background-color: #008b83;
+    }
+
+    &.disabled {
+      border-color: $color-gray-300;
+      background-color: $color-gray-200;
+      cursor: not-allowed;
+      path {
+        stroke: #ced4da;
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs'
+import { IconButton } from './IconButton'
+import PlusIcon from '@components/common/svgs/PlusIcon'
+import { Space } from '@components/common/Space'
+
+<Meta
+  title="Button/IconButton"
+  component={IconButton}
+  argTypes={{
+    size: {
+      defaultValue: 'md',
+      control: 'radio',
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+    },
+    IconComponent: {
+      control: false,
+    },
+    disabled: {
+      defaultValue: false,
+      control: 'boolean',
+    },
+  }}
+/>
+
+# IconButton
+
+아이콘을 포함하는 둥근 버튼 컴포넌트입니다.
+
+## Basic Usage
+
+<Canvas>
+  <Story name="Basic Usage">{(props) => <IconButton IconComponent={PlusIcon} {...props} />}</Story>
+</Canvas>
+
+<ArgsTable story="Basic Usage" include={['size']} />
+
+## Interaction
+
+hover, active, disabled 상태에 따라 글씨와 배경색상이 달라집니다.
+
+<Canvas>
+  <Story name="Interaction">{(props) => <IconButton IconComponent={PlusIcon} {...props} />}</Story>
+</Canvas>
+
+<ArgsTable story="Interaction" include={['disabled']} />

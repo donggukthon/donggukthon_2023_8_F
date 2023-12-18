@@ -1,0 +1,42 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs'
+import { FittedTab } from './FittedTab'
+import PlusIcon from '@components/common/svgs/PlusIcon'
+import { Space } from '@components/common/Space'
+import { Box } from '@components/common/Box'
+import { Tab } from '@components/common/Tab/Tab'
+
+<Meta
+  title="Tab/FittedTab"
+  component={FittedTab}
+  argTypes={{
+    offsetX: {
+      defaultValue: undefined,
+      control: 'number',
+    },
+  }}
+/>
+
+# FittedTab
+
+모바일 전용 탭 컨테이너 컴포넌트입니다.
+
+## Basic Usage
+
+<Canvas>
+  <Story name="Basic Usage">
+    {(props) => (
+      <Box width="100%" maxWidth={600} m="0 auto">
+        <FittedTab {...props}>
+          <Tab underline={true} selected={true}>
+            로앤굿
+          </Tab>
+          <Tab underline={true}>프로덕트팀</Tab>
+          <Tab underline={true}>의뢰인팀</Tab>
+          <Tab underline={true}>변호사팀</Tab>
+        </FittedTab>
+      </Box>
+    )}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Basic Usage" include={['offsetX']} />

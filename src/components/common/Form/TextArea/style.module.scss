@@ -1,0 +1,31 @@
+@use '@styles/definitions' as *;
+
+.text-area {
+  @include body-16-regular($color-gray-700);
+  width: 100%;
+  border: 1px solid $color-gray-400;
+  padding: 10px 16px;
+  background-color: white;
+  resize: none;
+  border-radius: 4px;
+
+  &:focus {
+    border-color: $color-primary-accent;
+  }
+
+  &.error {
+    border-color: $color-fail;
+  }
+
+  &:disabled {
+    background-color: $color-gray-100;
+  }
+
+  &::placeholder {
+    color: $color-gray-500;
+  }
+
+  &.resize {
+    resize: both;
+  }
+}

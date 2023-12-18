@@ -1,0 +1,101 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs'
+import { ContainedButton } from './ContainedButton'
+import PlusIcon from '@components/common/svgs/PlusIcon'
+import { Space } from '@components/common/Space'
+
+<Meta
+  title="Button/ContainedButton"
+  component={ContainedButton}
+  argTypes={{
+    kind: {
+      defaultValue: 'primary',
+      control: 'radio',
+      options: ['cta', 'primary', 'secondary-gray', 'secondary-accent'],
+    },
+    size: {
+      defaultValue: 'md',
+      control: 'radio',
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+    },
+    LeftIconComponent: {
+      control: false,
+    },
+    RightIconComponent: {
+      control: false,
+    },
+    full: {
+      defaultValue: false,
+      control: 'boolean',
+    },
+    round: {
+      defaultValue: false,
+      control: 'boolean',
+    },
+    disabled: {
+      defaultValue: false,
+      control: 'boolean',
+    },
+  }}
+/>
+
+# ContainedButton
+
+배경색이 있는 버튼 컴포넌트입니다.
+
+## Basic Usage
+
+<Canvas>
+  <Story name="Basic Usage">{(props) => <ContainedButton {...props}>버튼</ContainedButton>}</Story>
+</Canvas>
+
+<ArgsTable story="Basic Usage" include={['kind', 'size']} />
+
+## Icon
+
+왼쪽이나 오른쪽에 아이콘을 표시할 수 있습니다.
+
+<Canvas>
+  <Story name="Icon">
+    {(props) => (
+      <div>
+        <ContainedButton LeftIconComponent={PlusIcon} {...props}>
+          버튼
+        </ContainedButton>
+        <Space height={8} />
+        <ContainedButton RightIconComponent={PlusIcon} {...props}>
+          버튼
+        </ContainedButton>
+      </div>
+    )}
+  </Story>
+</Canvas>
+
+## Interaction
+
+hover, active, disabled 상태에 따라 글씨와 배경색상이 달라집니다.
+
+<Canvas>
+  <Story name="Interaction">{(props) => <ContainedButton {...props}>버튼</ContainedButton>}</Story>
+</Canvas>
+
+<ArgsTable story="Interaction" include={['disabled']} />
+
+## Full Size
+
+영역을 가득 채우도록 할 수 있습니다.
+
+<Canvas>
+  <Story name="Full Size">{(props) => <ContainedButton {...props}>버튼</ContainedButton>}</Story>
+</Canvas>
+
+<ArgsTable story="Full Size" include={['full']} />
+
+## Rounded
+
+둥근 버튼으로 사용 할 수 있습니다.
+
+<Canvas>
+  <Story name="Rounded">{(props) => <ContainedButton {...props}>버튼</ContainedButton>}</Story>
+</Canvas>
+
+<ArgsTable story="Rounded" include={['round']} />

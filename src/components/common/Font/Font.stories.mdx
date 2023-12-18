@@ -1,0 +1,102 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs'
+import { Font } from './index'
+import { colors, ColorThemeKeys, baseColors } from '../core/colors'
+import fontVariants from './fontVariants'
+import { isObject } from 'lodash'
+
+<Meta
+  title="ui-system/Font"
+  component={Font}
+  argTypes={{
+    type: {
+      name: 'type',
+      description: '타이포그래피 타입',
+      options: Object.keys(fontVariants),
+      defaultValue: 'display-28-bold',
+    },
+    children: {
+      defaultValue: '로앤굿',
+    },
+    color: {
+      defaultValue: colors.gray['800'],
+      options: Object.entries(baseColors)
+        .map(([key, value]) => {
+          if (isObject(value)) {
+            return Object.keys(value).map((nestedKey) => `${key === 'green' ? 'primary' : 'gray'}.${nestedKey}`)
+          } else {
+            return key
+          }
+        })
+        .flatMap((color) => color),
+    },
+  }}
+/>
+
+export const Template = (args) => <Font {...args} />
+
+# Font
+
+**타이포그래피**는 콘텐츠의 중요한 정도를 구분하고, 텍스트 전체의 밸런스를 맞추어 사용자의 프로덕트 경험을 향상시킵니다.<br />
+텍스트 목적과 기능에 따라 타입을 유의해 사용합니다.
+
+<Canvas>
+  <Story name="Font">{(props) => <Font {...props} />}</Story>
+</Canvas>
+
+<ArgsTable story="Font" include={['type', 'color']} />
+
+## **1. Size 예시**
+
+> **Display-38-Bold**
+
+<Canvas>
+  <Story
+    name="Display-38-Bold"
+    args={{
+      type: 'display-38-bold',
+    }}
+  >
+    {(props) => <Font {...props} />}
+  </Story>
+</Canvas>
+
+> **Heading-16-Medium**
+
+<Canvas>
+  <Story
+    name="Heading-16-Medium"
+    args={{
+      type: 'heading-16-medium',
+    }}
+  >
+    {(props) => <Font {...props} />}
+  </Story>
+</Canvas>
+
+## **2. Color 예시**
+
+> **Color-Primary-500**
+
+<Canvas>
+  <Story
+    name="Color-Primary-500"
+    args={{
+      color: colors.primary.accent,
+    }}
+  >
+    {(props) => <Font {...props} />}
+  </Story>
+</Canvas>
+
+> **Color-Primary-800**
+
+<Canvas>
+  <Story
+    name="Color-Primary-800"
+    args={{
+      color: colors.primary.base,
+    }}
+  >
+    {(props) => <Font {...props} />}
+  </Story>
+</Canvas>

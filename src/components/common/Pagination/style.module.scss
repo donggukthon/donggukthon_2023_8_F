@@ -1,0 +1,45 @@
+@use '@styles/definitions' as *;
+
+.pagination {
+  @include custom-flex(center, center);
+  @include no-drag();
+
+  .arrow {
+    width: 40px;
+    height: 40px;
+    @include custom-flex(center, center);
+    cursor: pointer;
+
+    path {
+      fill: $color-gray-700;
+    }
+
+    &.disable {
+      pointer-events: none;
+
+      path {
+        fill: $color-gray-500;
+      }
+    }
+
+    &.left {
+      transform: rotate(-180deg);
+    }
+  }
+
+  .page-number-container {
+    @include custom-flex(center, center);
+    .page-number {
+      @include circle(40px);
+      @include custom-flex(center, center);
+      @include btn-14-medium($color-gray-600);
+      background-color: initial;
+      cursor: pointer;
+
+      &.active {
+        color: $color-primary-accent;
+        background-color: hex-to-rgba($color-primary-accent, 0.2);
+      }
+    }
+  }
+}

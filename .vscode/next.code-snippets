@@ -1,0 +1,105 @@
+{
+  "react-function-component-skeleton": {
+    "scope": "typescriptreact",
+    "prefix": "rfc",
+    "body": [
+      "import { FC } from 'react';",
+      "import { Column } from '@components/common/Column'",
+      "",
+      "type ${TM_FILENAME_BASE}$1Props = {",
+      "  className?: string",
+      "}",
+      "",
+      "export const ${TM_FILENAME_BASE}$1: FC<${TM_FILENAME_BASE}$1Props> = ({ className }) => {",
+      "  return <Column className={className}>${TM_FILENAME_BASE}$1</Column>;",
+      "};",
+      ""
+    ]
+  },
+  "next-page-skeleton": {
+    "scope": "typescriptreact",
+    "prefix": "nextpage",
+    "body": [
+      "import type { NextPage } from 'next'",
+      "import { MetaTags } from '@libs/seo'",
+      "import { Footer } from '@components/common/Footer'",
+      "import { getUrl } from '@utils/getUrl'",
+      "import { Space } from '@components/common/Space'",
+      "import { FOOTER_HEIGHT, FOOTER_POSITION_BOTTOM, HEADER_HEIGHT, MOBILE_ROOT_MAX_WIDTH } from '@constants/layout'",
+      "import { Column } from '@components/common/Column'",
+      "import { Position } from '@components/common/Position'",
+      "import { Header } from '@components/common/Header'",
+      "import { Paper } from '@components/common/Paper'",
+      "",
+      "const $1Path = '${TM_FILEPATH/(.*)pages(.*)(\\/index)\\.(.*)/${2}/}'",
+      "",
+      "type $1Props = {}",
+      "",
+      "export const get$1Url = (params: $1Props) =>",
+      "  getUrl<$1Props>($1Path, params)",
+      "",
+      "const $1: NextPage<$1Props> = () => (",
+      "  <Position position={'relative'}>",
+      "<Paper bgColor={'temp.#DACDC3'}>"
+      "<Column",
+      "  maxWidth={[MOBILE_ROOT_MAX_WIDTH, '100%']}",
+      "  minHeight={`100vh`}",
+      "  pb={FOOTER_HEIGHT}",
+      "  mx={'auto'}",
+      ">",
+      "    <MetaTags />",
+      "    <Header />",
+      "    <Space height={HEADER_HEIGHT} />",
+      "    <Footer />",
+      "    </Column>",
+      "</Paper>",
+      "  </Position>",
+      ")",
+      "",
+      "export default $1"
+    ]
+  },
+  "get-static-props-skeleton": {
+    "scope": "typescriptreact",
+    "prefix": "get-static-props",
+    "body": [
+      "export const getStaticProps: GetStaticProps<{ dehydratedState: DehydratedState }, Props> = async (",
+      "  context",
+      ") => {",
+      "  const queryClient = new QueryClient()",
+      "",
+      "  return {",
+      "    props: {",
+      "      dehydratedState: dehydrate(queryClient),",
+      "    },",
+      "    revalidate: 5 * 60,",
+      "  }",
+      "}",
+      "",
+      "export const getStaticPaths: GetStaticPaths = async () => {",
+      "  return {",
+      "    paths: [],",
+      "    fallback: 'blocking',",
+      "  }",
+      "}"
+    ]
+  },
+  "get-serverside-props-skeleton": {
+    "scope": "typescriptreact",
+    "prefix": "get-serverside-props",
+    "body": [
+      "export const getServerSideProps: GetServerSideProps<",
+      "  { dehydratedState: DehydratedState },",
+      "  Props",
+      "> = async (context) => {",
+      "  const queryClient = new QueryClient()",
+      "",
+      "  return {",
+      "    props: {",
+      "      dehydratedState: dehydrate(queryClient),",
+      "    },",
+      "  }",
+      "},"
+    ]
+  }
+}

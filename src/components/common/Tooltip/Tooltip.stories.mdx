@@ -1,0 +1,63 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs'
+import PlusIcon from '@components/common/svgs/PlusIcon'
+import { Tooltip } from './Tooltip'
+import { ContainedButton } from '@components/common/Button/ContainedButton'
+import { Font } from '@components/common/Font'
+import { Box } from '@components/common/Box'
+
+<Meta
+  title="ui-system/Tooltip"
+  component={Tooltip}
+  argTypes={{
+    placement: {
+      defaultValue: 'bottom',
+      control: 'radio',
+      options: [
+        'bottom-end',
+        'bottom-start',
+        'bottom',
+        'left-end',
+        'left-start',
+        'left',
+        'right-end',
+        'right-start',
+        'right',
+        'top-end',
+        'top-start',
+        'top',
+      ],
+    },
+  }}
+/>
+
+export const Template = (args) => <Tooltip {...args} />
+
+# Tooltip
+
+## Basic Usage
+
+<Canvas>
+  <Story name="Basic Usage">
+    {(props) => (
+      <Box p={100}>
+        <Tooltip
+          bg="black"
+          opened={true}
+          renderOpener={() => (
+            <ContainedButton kind="cta" size="lg">
+              버튼
+            </ContainedButton>
+          )}
+          renderContent={() => (
+            <Font type="heading-16-medium" color="white">
+              툴팁 메시지입니다.
+            </Font>
+          )}
+          {...props}
+        ></Tooltip>
+      </Box>
+    )}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Basic Usage" />

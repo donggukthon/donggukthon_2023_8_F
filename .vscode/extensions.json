@@ -1,0 +1,14 @@
+{
+	"recommendations": [
+        "streetsidesoftware.code-spell-checker",
+		"naumovs.color-highlight",
+        "dbaeumer.vscode-eslint",
+        "donjayamanne.githistory",
+        "GitHub.vscode-pull-request-github",
+        "eamodio.gitlens",
+        "unifiedjs.vscode-mdx",
+        "Shiesh.todo-tree",
+        "esbenp.prettier-vscode",
+        "styled-components.vscode-styled-components"
+	]
+}

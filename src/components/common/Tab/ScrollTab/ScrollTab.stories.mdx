@@ -1,0 +1,46 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs'
+import { ScrollTab } from './ScrollTab'
+import PlusIcon from '@components/common/svgs/PlusIcon'
+import { Space } from '@components/common/Space'
+import { Box } from '@components/common/Box'
+import { Tab } from '@components/common/Tab/Tab'
+
+<Meta
+  title="Tab/ScrollTab"
+  component={ScrollTab}
+  argTypes={{
+    offsetX: {
+      defaultValue: undefined,
+      control: 'number',
+    },
+  }}
+/>
+
+# ScrollTab
+
+스크롤 가능한 탭 컨테이너 컴포넌트입니다.
+
+## Basic Usage
+
+<Canvas>
+  <Story name="Basic Usage">
+    {(props) => (
+      <Box width={600} m="0 auto">
+        <ScrollTab {...props}>
+          <Tab selected={true}>로앤굿</Tab>
+          <Tab>프로덕트팀</Tab>
+          <Tab>의뢰인팀</Tab>
+          <Tab>변호사팀</Tab>
+          <Tab>커뮤니케이션팀</Tab>
+          <Tab>전략기획팀</Tab>
+          <Tab>프론트앤드챕터</Tab>
+          <Tab>백앤드챕터</Tab>
+          <Tab>디자인챕터</Tab>
+          <Tab>인사이트챕터</Tab>
+        </ScrollTab>
+      </Box>
+    )}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Basic Usage" include={['offsetX']} />

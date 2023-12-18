@@ -1,0 +1,41 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs'
+import { Avatar } from './Avatar'
+import PlusIcon from '@components/common/svgs/PlusIcon'
+import { Space } from '@components/common/Space'
+import { Box } from '@components/common/Box'
+import DeafultLawyerProfileImage from '@images/posts/default-lawyer-profile-image.png'
+
+<Meta
+  title="Avatar"
+  component={Avatar}
+  argTypes={{
+    size: {
+      defaultValue: 40,
+      control: 'number',
+    },
+    src: {
+      defaultValue: DeafultLawyerProfileImage,
+      control: false,
+    },
+    fallback: {
+      defaultValue: DeafultLawyerProfileImage,
+      control: false,
+    },
+    alt: {
+      defaultValue: 'avatar',
+      control: false,
+    },
+  }}
+/>
+
+# Avatar
+
+프로필 이미지를 나타낼 수 있는 아바타 컴포넌트입니다.
+
+## Basic Usage
+
+<Canvas>
+  <Story name="Basic Usage">{(props) => <Avatar {...props} />}</Story>
+</Canvas>
+
+<ArgsTable story="Basic Usage" include={['size']} />

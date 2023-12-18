@@ -1,0 +1,17 @@
+@use '@styles/definitions' as *;
+
+.link {
+  cursor: pointer;
+}
+
+.box {
+  display: block;
+}
+
+.full {
+  width: 100%;
+}
+
+.button {
+  @include custom-flex(center, center);
+}

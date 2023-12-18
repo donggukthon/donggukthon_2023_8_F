@@ -1,0 +1,1 @@
+export { MypagePage } from './MypagePage'

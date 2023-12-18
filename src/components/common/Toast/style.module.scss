@@ -1,0 +1,97 @@
+@use '@styles/definitions' as *;
+@use '@styles/animations' as *;
+
+.toast {
+  position: fixed;
+  left: 50%;
+  top: 0;
+  margin-top: 20px;
+  width: 500px;
+  padding: 16px;
+  background-color: rgba(52, 58, 64, 0.9);
+  border-radius: 4px;
+
+  @include custom-flex(center, space-between, row, nowrap);
+
+  animation-duration: 300ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+
+  &.open {
+    @include slide-animation(-50%, calc(-100% - 20px), -50%, 0);
+  }
+
+  &.close {
+    @include slide-animation(-50%, 0, -50%, calc(-100% - 20px));
+  }
+
+  @include mobile {
+    width: calc(100% - 32px);
+    padding: 14px 16px;
+  }
+
+  .content {
+    @include custom-flex(center, flex-start, row, nowrap);
+    flex-shrink: 0;
+
+    .icon {
+      display: flex;
+      margin-right: 12px;
+      width: 22px;
+      height: 22px;
+
+      @include mobile {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    .title {
+      @include heading-16-regular($color-white);
+
+      @include mobile {
+        @include heading-14-medium($color-white);
+      }
+    }
+
+    .description {
+      @include heading-14-regular($color-white);
+    }
+  }
+
+  .close-icon {
+    width: 22px;
+    height: 22px;
+    margin-left: 12px;
+    cursor: pointer;
+
+    > * {
+      fill: white;
+    }
+
+    @include mobile {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+@keyframes slideInFromTop {
+  from {
+    transform: translate(-50%, calc(-100% - 20px));
+  }
+
+  to {
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes slideOutFromTop {
+  from {
+    transform: translate(-50%, 0);
+  }
+
+  to {
+    transform: translate(-50%, calc(-100% - 20px));
+  }
+}

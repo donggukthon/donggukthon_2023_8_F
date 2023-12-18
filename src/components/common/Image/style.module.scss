@@ -1,0 +1,59 @@
+@use '@styles/definitions' as *;
+
+.ratio {
+  width: 100%;
+}
+
+.ratio-16-9 {
+  position: relative;
+  padding-bottom: 56.25%;
+}
+.ratio-4-3 {
+  position: relative;
+  padding-bottom: 75%;
+}
+.ratio-2-1 {
+  position: relative;
+  padding-bottom: 50%;
+}
+.ratio-1-1 {
+  position: relative;
+  padding-bottom: 100%;
+}
+.ratio-1-2 {
+  position: relative;
+  padding-bottom: calc((1 / 2) * 100%);
+}
+.ratio-3-4 {
+  position: relative;
+  padding-bottom: calc((4 / 3) * 100%);
+}
+.ratio-9-16 {
+  position: relative;
+  padding-bottom: calc((16 / 9) * 100%);
+}
+
+.custom-image {
+  @include custom-flex(center, center);
+}
+
+.img-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  > span {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+.image {
+  background-color: $color-gray-50;
+
+  &.transparent {
+    background-color: transparent;
+  }
+}

@@ -1,0 +1,12 @@
+import * as React from 'react'
+import { SVGProps } from 'react'
+
+const SvgSwiperButtonIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg width={29} height={29} viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <rect x={0.5} y={0.5} width={28} height={28} fill="white" stroke="#EAEAEA" />
+    <rect x={10.5508} y={14.5} width={7} height={1.5} transform="rotate(-45 10.5508 14.5)" fill="#28282D" />
+    <rect x={10.5508} y={14.5} width={1.5} height={7} transform="rotate(-45 10.5508 14.5)" fill="#28282D" />
+  </svg>
+)
+
+export default SvgSwiperButtonIcon

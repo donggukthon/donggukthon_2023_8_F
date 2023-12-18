@@ -1,0 +1,40 @@
+{
+  "scss-definition": {
+    "scope": "scss",
+    "prefix": "sdef",
+    "body": ["@use '@styles/definitions' as *;"]
+  },
+  "include-custom-flex-mixin": {
+    "scope": "scss",
+    "prefix": "@cf",
+    "body": "@include custom-flex($1, $2);"
+  },
+  "include-container-mixin": {
+    "scope": "scss",
+    "prefix": "@con",
+    "body": "@include container($1);"
+  },
+  "include-mobile-mixin": {
+    "scope": "scss",
+    "prefix": "@mo",
+    "body": [
+      "@include mobile {", 
+      "$1", 
+      "}"
+    ]
+  },
+  "include-desktop-mixin": {
+    "scope": "scss",
+    "prefix": "@desk",
+    "body": [
+      "@include desktop {", 
+      "$1", 
+      "}"
+    ]
+  },
+  "include-font-mixin": {
+    "scope": "scss",
+    "prefix": "@inf",
+    "body": "@include f($$s: ${1:false}, $$w: ${2:false}, $$ls: ${3:false}, $$lh: ${4:false}, $$c: ${5:false});"
+  }
+}

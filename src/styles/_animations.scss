@@ -1,0 +1,29 @@
+@mixin slide-animation($startX, $startY, $endX, $endY) {
+  $id: unique-id();
+
+  @keyframes #{$id} {
+    from {
+      transform: translate($startX, $startY);
+    }
+    to {
+      transform: translate($endX, $endY);
+    }
+  }
+
+  animation-name: $id;
+}
+
+@mixin fade-animation($startOpacity, $endOpacity) {
+  $id: unique-id();
+
+  @keyframes #{$id} {
+    from {
+      opacity: $startOpacity;
+    }
+    to {
+      opacity: $endOpacity;
+    }
+  }
+
+  animation-name: $id;
+}

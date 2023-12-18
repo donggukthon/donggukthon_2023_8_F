@@ -1,0 +1,709 @@
+/* Variables */
+
+//window size
+$breakpoint-desktop: 781px;
+$breakpoint-tablet: 1200px;
+$breakpoint-mobile: 780px;
+$breakpoint-mobile-extreme: 320px;
+
+$vh: var(--vh, 1vh);
+$vh100: calc(#{$vh} * 100);
+
+$container-large: 1120px;
+$container-medium: 960px;
+$container-small: 700px;
+
+$desktop-container-max-width: 960px;
+$mobile-container-padding: 20px;
+
+// font
+$main-font: 'NotoSansKR', 'Sans-serif';
+
+//color
+$color-success: #0078d4;
+$color-wraning: #eb683f;
+$color-fail: #df1d1d;
+
+$color-white: #ffffff;
+$color-black: #000000;
+
+$color-coral: #e6635e;
+
+$color-primary-50: #f4fbfb;
+$color-primary-100: #ebfaf8;
+$color-primary-200: #9cf0e2;
+$color-primary-300: #33d8be;
+$color-primary-400: #1ac6ac;
+$color-primary-500: #09ad97;
+$color-primary-600: #008f7f;
+$color-primary-700: #006c63;
+$color-primary-800: #005a54;
+$color-primary-900: #004744;
+
+$color-primary-base: $color-primary-800;
+$color-primary-accent: $color-primary-500;
+
+$color-status-success: #0078d4;
+
+$color-skin-dark: #ffcb9c;
+$color-skin-base: #ffefe1;
+$color-skin-light: #fff5eb;
+
+$color-gray-50: #f8f9fa;
+$color-gray-100: #f1f3f5;
+$color-gray-200: #e9ecef;
+$color-gray-300: #dee2e6;
+$color-gray-400: #ccd2d8;
+$color-gray-500: #aeb5ba;
+$color-gray-600: #888e94;
+$color-gray-650: #646a70;
+$color-gray-700: #484f54;
+$color-gray-750: #3a3e43;
+$color-gray-800: #32363a;
+$color-gray-850: #26282b;
+$color-gray-900: #1f2022;
+$color-gray-950: #17181a;
+
+$color-blue-50: #fcfdff;
+$color-blue-100: #f5faff;
+$color-blue-200: #ebf1ff;
+$color-blue-300: #e1e8fc;
+$color-blue-400: #d2def7;
+$color-blue-500: #bccff7;
+$color-blue-600: #97b4f7;
+$color-blue-700: #6f98f7;
+$color-blue-800: #5783f2;
+$color-blue-900: #2c57be;
+
+// design library test color
+$test-color-primary-50: #f2fafa;
+
+// 로앤굿 2.0 색
+$color-28282D: #28282d;
+$color-3B3B42: #3b3b42;
+$color-46464F: #46464f;
+$color-5D5D6C: #5d5d6c;
+$color-89898E: #89898e;
+$color-BABABD: #bababd;
+$color-EAEAEA: #eaeaea;
+$color-F6F6F6: #f6f6f6;
+
+$color-FFFAF6: #fffaf6;
+$color-435D5B: #435d5b;
+$color-295240: #295240;
+
+$color-C09266: #c09266;
+$color-217C9A: #217c9a;
+
+//element
+$nav-height: 80px;
+$nav-mobile-height: 54px;
+
+//radius
+$radius-small: 4px;
+$radius-medium: 8px;
+$radius-large: 16px;
+$radius-xlarge: 20px;
+$radius-xxlarge: 24px;
+
+/* End: Variables */
+
+/* Start: Typography */
+@mixin f($s: false, $w: false, $ls: false, $lh: false, $c: false) {
+  @if $s {
+    font-size: unquote($s + 'px');
+  }
+
+  @if $w {
+    font-weight: $w;
+
+    @if $w >= 600 {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  }
+
+  @if $c {
+    color: $c;
+  }
+
+  @if $ls {
+    $str-ls: quote($ls + '');
+
+    @if (str-index($str-ls, 'em')) {
+      letter-spacing: $ls;
+    } @else {
+      letter-spacing: unquote($ls + 'px');
+    }
+  }
+
+  @if $lh {
+    line-height: unquote($lh + 'px');
+  }
+}
+
+@mixin display-38-bold($color: false) {
+  @include f($s: 38, $w: 700, $ls: 0, $lh: 50, $c: $color);
+}
+
+@mixin display-32-bold($color: false) {
+  @include f($s: 32, $w: 700, $ls: 0, $lh: 42, $c: $color);
+}
+
+@mixin display-28-bold($color: false) {
+  @include f($s: 28, $w: 700, $ls: 0, $lh: 40, $c: $color);
+}
+
+@mixin display-24-bold($color: false) {
+  @include f($s: 24, $w: 700, $ls: 0, $lh: 34, $c: $color);
+}
+
+@mixin display-22-bold($color: false) {
+  @include f($s: 22, $w: 700, $ls: 0, $lh: 32, $c: $color);
+}
+
+@mixin heading-20-bold($color: false) {
+  @include f($s: 20, $w: 700, $ls: 0, $lh: 28, $c: $color);
+}
+
+@mixin heading-18-bold($color: false) {
+  @include f($s: 18, $w: 700, $ls: 0, $lh: 26, $c: $color);
+}
+
+@mixin heading-16-bold($color: false) {
+  @include f($s: 16, $w: 700, $ls: 0, $lh: 24, $c: $color);
+}
+
+@mixin heading-15-bold($color: false) {
+  @include f($s: 15, $w: 700, $ls: 0, $lh: 22, $c: $color);
+}
+
+@mixin heading-14-bold($color: false) {
+  @include f($s: 14, $w: 700, $ls: 0, $lh: 20, $c: $color);
+}
+
+@mixin heading-20-semibold($color: false) {
+  @include f($s: 20, $w: 600, $ls: 0, $lh: 28, $c: $color);
+}
+
+@mixin heading-18-semibold($color: false) {
+  @include f($s: 18, $w: 600, $ls: 0, $lh: 26, $c: $color);
+}
+
+@mixin heading-16-semibold($color: false) {
+  @include f($s: 16, $w: 600, $ls: 0, $lh: 24, $c: $color);
+}
+
+@mixin heading-15-semibold($color: false) {
+  @include f($s: 15, $w: 600, $ls: 0, $lh: 22, $c: $color);
+}
+
+@mixin heading-14-semibold($color: false) {
+  @include f($s: 14, $w: 600, $ls: 0, $lh: 20, $c: $color);
+}
+
+@mixin heading-13-semibold($color: false) {
+  @include f($s: 13, $w: 600, $ls: 0, $lh: 18, $c: $color);
+}
+
+@mixin heading-20-medium($color: false) {
+  @include f($s: 20, $w: 500, $ls: 0, $lh: 28, $c: $color);
+}
+
+@mixin heading-18-medium($color: false) {
+  @include f($s: 18, $w: 500, $ls: 0, $lh: 26, $c: $color);
+}
+
+@mixin heading-16-medium($color: false) {
+  @include f($s: 16, $w: 500, $ls: 0, $lh: 24, $c: $color);
+}
+
+@mixin heading-15-medium($color: false) {
+  @include f($s: 15, $w: 500, $ls: 0, $lh: 22, $c: $color);
+}
+
+@mixin heading-14-medium($color: false) {
+  @include f($s: 14, $w: 500, $ls: 0, $lh: 20, $c: $color);
+}
+
+@mixin heading-12-medium($color: false) {
+  @include f($s: 12, $w: 500, $ls: 0, $lh: 16, $c: $color);
+}
+
+@mixin heading-20-regular($color: false) {
+  @include f($s: 20, $w: 400, $ls: 0, $lh: 28, $c: $color);
+}
+
+@mixin heading-18-regular($color: false) {
+  @include f($s: 18, $w: 400, $ls: 0, $lh: 26, $c: $color);
+}
+
+@mixin heading-16-regular($color: false) {
+  @include f($s: 16, $w: 400, $ls: 0, $lh: 24, $c: $color);
+}
+
+@mixin heading-15-regular($color: false) {
+  @include f($s: 15, $w: 400, $ls: 0, $lh: 22, $c: $color);
+}
+
+@mixin heading-14-regular($color: false) {
+  @include f($s: 14, $w: 400, $ls: 0, $lh: 20, $c: $color);
+}
+
+@mixin heading-12-regular($color: false) {
+  @include f($s: 12, $w: 400, $ls: 0, $lh: 16, $c: $color);
+}
+
+@mixin body-18-regular($color: false) {
+  @include f($s: 18, $w: 400, $ls: -0.1, $lh: 34, $c: $color);
+}
+
+@mixin body-16-regular($color: false) {
+  @include f($s: 16, $w: 400, $ls: -0.1, $lh: 28, $c: $color);
+}
+
+@mixin body-14-regular($color: false) {
+  @include f($s: 14, $w: 400, $ls: -0.1, $lh: 24, $c: $color);
+}
+
+@mixin btn-18-bold($color: false) {
+  @include f($s: 18, $w: 700, $ls: 0, $lh: 18, $c: $color);
+}
+
+@mixin btn-16-bold($color: false) {
+  @include f($s: 16, $w: 700, $ls: 0, $lh: 16, $c: $color);
+}
+
+@mixin btn-14-bold($color: false) {
+  @include f($s: 14, $w: 700, $ls: 0, $lh: 14, $c: $color);
+}
+
+@mixin btn-16-medium($color: false) {
+  @include f($s: 16, $w: 500, $ls: 0, $lh: 16, $c: $color);
+}
+
+@mixin btn-14-medium($color: false) {
+  @include f($s: 14, $w: 500, $ls: 0, $lh: 14, $c: $color);
+}
+
+@mixin btn-14-regular($color: false) {
+  @include f($s: 14, $w: 400, $ls: 0, $lh: 14, $c: $color);
+}
+
+@mixin btn-16-regular($color: false) {
+  @include f($s: 16, $w: 400, $ls: 0, $lh: 16, $c: $color);
+}
+
+@mixin btn-12-medium($color: false) {
+  @include f($s: 12, $w: 500, $ls: 0, $lh: 12, $c: $color);
+}
+
+@mixin btn-12-regular($color: false) {
+  @include f($s: 12, $w: 400, $ls: 0, $lh: 12, $c: $color);
+}
+
+@mixin btn-12-bold($color: false) {
+  @include f($s: 12, $w: 700, $ls: 0, $lh: 12, $c: $color);
+}
+
+/* End: Typography */
+
+/* Start: Functions */
+/*
+@usage
+ex1. color: hex-to-rgba(#12345678);
+ex2. color: hex-to-rgba(#42b883, 0.5);
+ex3. color: hex-to-rgba(#333, 0.5);
+ */
+@function hex-to-rgba($hex, $opacity: '') {
+  @if $opacity == '' {
+    @if str-length(quote(#{$hex})) == 9 {
+      $hex-opacity: str-slice(quote(#{$hex}), 8, 9);
+      $opacity: 0;
+
+      @for $i from 1 through 2 {
+        $letter: str-slice($hex-opacity, $i, $i);
+        $num: 0;
+
+        @if $letter == '0' {
+          $num: 0;
+        } @else if $letter == '1' {
+          $num: 1;
+        } @else if $letter == '2' {
+          $num: 2;
+        } @else if $letter == '3' {
+          $num: 3;
+        } @else if $letter == '4' {
+          $num: 4;
+        } @else if $letter == '5' {
+          $num: 5;
+        } @else if $letter == '6' {
+          $num: 6;
+        } @else if $letter == '7' {
+          $num: 7;
+        } @else if $letter == '8' {
+          $num: 8;
+        } @else if $letter == '9' {
+          $num: 9;
+        } @else if $letter == 'A' {
+          $num: 10;
+        } @else if $letter == 'B' {
+          $num: 11;
+        } @else if $letter == 'C' {
+          $num: 12;
+        } @else if $letter == 'D' {
+          $num: 13;
+        } @else if $letter == 'E' {
+          $num: 14;
+        } @else if $letter == 'F' {
+          $num: 15;
+        }
+
+        @if $i == 1 {
+          $opacity: $opacity + $num * 16;
+        } @else {
+          $opacity: $opacity + $num;
+        }
+      }
+      $opacity: round($opacity * 0.390625) * 0.01; // 0.390625 == 100 / 256
+    } @else {
+      $opacity: 1;
+    }
+  }
+  @return rgba($hex, $opacity);
+}
+
+/* End: Functions */
+
+/* Mixins */
+@mixin desktop() {
+  @media (min-width: $breakpoint-desktop) {
+    & {
+      @content;
+    }
+  }
+}
+
+@mixin mobile() {
+  @media (max-width: $breakpoint-mobile) {
+    & {
+      @content;
+    }
+  }
+}
+
+@mixin mobile-extreme() {
+  @media (max-width: $breakpoint-mobile-extreme) {
+    & {
+      @content;
+    }
+  }
+}
+
+@mixin ie() {
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    & {
+      @content;
+    }
+  }
+}
+
+@mixin not-ie() {
+  @supports not (-ms-high-contrast: none) {
+    & {
+      @content;
+    }
+  }
+}
+
+@mixin ios() {
+  @supports (-webkit-touch-callout: none) {
+    @content;
+  }
+}
+
+@mixin no-drag() {
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+
+@mixin no-arrow-select() {
+  -webkit-appearance: none; /* for chrome */
+  -moz-appearance: none; /*for firefox*/
+  appearance: none;
+
+  &::-ms-expand {
+    display: none; /*for IE10,11*/
+  }
+}
+
+@mixin ratio-16-9() {
+  padding-bottom: 56.25%;
+}
+@mixin ratio-4-3() {
+  padding-bottom: 75%;
+}
+@mixin ratio-1-1() {
+  padding-bottom: 100%;
+}
+@mixin ratio-3-4() {
+  padding-bottom: calc((4 / 3) * 100);
+}
+@mixin ratio-9-16() {
+  padding-bottom: calc((16 / 9) * 100%);
+}
+
+@mixin container($max-width: 960px, $mobile-padding: 20px) {
+  width: 100%;
+  max-width: $max-width;
+  margin: 0 auto;
+
+  @include mobile {
+    width: calc(100% - $mobile-padding * 2);
+  }
+}
+
+@mixin full-container($background-color: transparent, $inner-max-width: 960px, $inner-mobile-padding: 20px) {
+  width: 100vw;
+  background-color: $background-color;
+  overflow-x: hidden;
+
+  & > * {
+    max-width: $inner-max-width;
+    margin: 0 auto;
+
+    @include mobile {
+      width: calc(100% - $inner-mobile-padding * 2);
+    }
+  }
+}
+
+/*
+이미지를 감싸는 박스에 꽉 차도록 이미지를 늘리는 믹스인
+세로로 늘어나야하면 $is-vertical true
+가로로 늘어나야하면 false
+ */
+@mixin image-cover($parent: false, $is-vertical: false) {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+
+  @if $parent {
+    @at-root #{$parent} {
+      position: relative;
+      overflow: hidden;
+    }
+  }
+}
+
+/*
+비율 박스 믹스인
+$width: 가로 상대 크기
+$height: 세로 상대 크기
+$value: 기준 사이즈
+$standard: 기준변 ('width' or 'height')
+
+가로 혹은 세로를 기준변($standard)으로 잡고,
+기준변($standard)의 사이즈를 기준사이즈($value)로 지정
+기준변이 아닌 변의 사이즈는 $width, $height의 비율을 계산하여 지정
+*/
+@mixin ratio-box($width, $height, $value: 100vw, $standard: 'width') {
+  @if $standard == 'width' {
+    width: calc(#{$value});
+    height: calc(#{$value} * #{$height} / #{$width});
+  } @else if $standard == 'height' {
+    height: calc(#{$value});
+    width: calc(#{$value} * #{$width} / #{$height});
+  }
+}
+
+//when: blue-box 사용할 때 (인자값: 넓이, 높이)
+@mixin custom-box($width, $height, $background-color: #28303b, $radius: 2px) {
+  border: none;
+  background-color: $background-color;
+  width: $width;
+  height: $height;
+  border-radius: $radius;
+}
+
+//when: scrollbar custom
+@mixin custom-scrollbar($width, $bg-color: #ededed, $bar-color: #888, $bar-radius: 4px) {
+  @if $width == 0 {
+    & {
+      -ms-overflow-style: none;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: $width;
+    cursor: pointer !important;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $bg-color;
+    cursor: pointer !important;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $bar-color;
+    border-radius: $bar-radius;
+    cursor: pointer !important;
+  }
+
+  & {
+    scrollbar-width: $width;
+    scrollbar-color: $bar-color $bg-color;
+    scrollbar-face-color: $bar-color;
+    scrollbar-track-color: $bg-color;
+
+    @content;
+  }
+}
+
+@mixin custom-scrollbar-height($height, $bg-color: #ededed, $bar-color: #888, $bar-radius: 4px) {
+  @if $height == 0 {
+    & {
+      -ms-overflow-style: none;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    height: $height;
+    cursor: pointer !important;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $bg-color;
+    cursor: pointer !important;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $bar-color;
+    border-radius: $bar-radius;
+    cursor: pointer !important;
+  }
+
+  & {
+    scrollbar-height: $height;
+    scrollbar-color: $bar-color $bg-color;
+    scrollbar-face-color: $bar-color;
+    scrollbar-track-color: $bg-color;
+
+    @content;
+  }
+}
+
+@mixin sticky() {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+@mixin placeholder($color, $weight: false) {
+  &::placeholder,
+  &::-webkit-input-placeholder {
+    color: $color;
+    opacity: 1;
+
+    @if $weight {
+      font-weight: $weight;
+    }
+  }
+
+  &:-ms-input-placeholder {
+    color: $color;
+    opacity: 1;
+
+    @if $weight {
+      font-weight: $weight;
+    }
+  }
+
+  &:-mos-input-placeholder {
+    color: $color;
+    opacity: 1;
+
+    @if $weight {
+      font-weight: $weight;
+    }
+  }
+}
+
+//when: ellipsis 사용할 떄
+@mixin ellipsis($line-num: 1) {
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  -moz-text-overflow: ellipsis;
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line-num;
+  word-break: break-word;
+}
+
+//when: flexbox 사용시
+@mixin custom-flex($align, $justify, $direction: row, $wrap: wrap) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+}
+
+@mixin row-spacing($spacing) {
+  & > * {
+    margin-right: $spacing;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+@mixin col-spacing($spacing) {
+  & > * {
+    margin-bottom: $spacing;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+//when: 너비가 flex에 의해 변형되지 않도록 절대 너비 설정
+@mixin absolute-width($width) {
+  max-width: $width;
+  min-width: $width;
+  width: $width;
+}
+
+@mixin custom-modal($width, $height, $back-color: rgba(0, 0, 0, 0.7), $modal-color: white, $radius: 7px) {
+  @include custom-box(100vw, 100vh, $back-color, 0);
+  @include custom-flex(center, center);
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  &.dp-none {
+    display: none;
+  }
+
+  .modal {
+    @include custom-box($width, $height, $modal-color, $radius);
+    min-height: 1px;
+  }
+}
+
+@mixin circle($size, $bg-color: #fafafa) {
+  width: $size;
+  height: $size;
+  border-radius: 100%;
+  background-color: $bg-color;
+  overflow: hidden;
+}
+
+/* End: Mixins */

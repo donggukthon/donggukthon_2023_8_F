@@ -1,0 +1,12 @@
+@use '@styles/definitions' as *;
+
+.radio {
+  @include custom-flex(center, center);
+  cursor: pointer;
+
+  &.checked {
+    &.disabled {
+      cursor: not-allowed;
+    }
+  }
+}

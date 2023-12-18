@@ -1,0 +1,47 @@
+@use '@styles/definitions' as *;
+
+.form-field {
+  &.horizontal {
+    .label {
+      @include custom-flex(center, flex-end, row-reverse, nowrap);
+      cursor: pointer;
+
+      .text {
+        @include no-drag();
+        margin-bottom: 0;
+        margin-left: 8px;
+      }
+    }
+
+    .message {
+      text-align: left;
+    }
+  }
+
+  .text {
+    @include heading-15-regular($color-gray-800);
+    margin-bottom: 8px;
+  }
+
+  .message {
+    @include heading-14-regular();
+    text-align: right;
+    margin-top: 2px;
+
+    &:first-of-type {
+      margin-top: 4px;
+    }
+
+    &.default {
+      color: $color-gray-600;
+    }
+
+    &.success {
+      color: $color-success;
+    }
+
+    &.error {
+      color: $color-wraning;
+    }
+  }
+}

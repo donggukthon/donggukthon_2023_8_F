@@ -1,0 +1,65 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs'
+import { GridList } from './GridList'
+import PlusIcon from '@components/common/svgs/PlusIcon'
+import { Space } from '@components/common/Space'
+import { Box } from '@components/common/Box'
+import { range } from 'lodash'
+
+<Meta
+  title="List/GridList"
+  component={GridList}
+  argTypes={{
+    row: {
+      defaultValue: [1, 2],
+      control: 'array',
+    },
+    column: {
+      defaultValue: [4, 2],
+      control: 'array',
+    },
+    rowGap: {
+      defaultValue: 8,
+      control: 'number',
+    },
+    columnGap: {
+      defaultValue: 8,
+      control: 'number',
+    },
+    children: {
+      defaultValue: range(4).map((_, idx) => <Box key={idx} width="100%" pb="100%" backgroundColor="gray.50" />),
+      control: false,
+    },
+  }}
+/>
+
+# GridList
+
+격자 형태의 리스트 컴포넌트입니다.
+
+## Basic Usage
+
+<Canvas>
+  <Story name="Basic Usage">{(props) => <GridList {...props} />}</Story>
+</Canvas>
+
+<ArgsTable story="Basic Usage" include={['row', 'column', 'rowGap', 'columnGap']} />
+
+## Row & Column
+
+row, column을 활용하여 표시할 자식 컴포넌트의 갯수를 지정할 수 있습니다.
+
+<Canvas>
+  <Story name="Row & Column">{(props) => <GridList {...props} />}</Story>
+</Canvas>
+
+<ArgsTable story="Row & Column" include={['row', 'column']} />
+
+## Gap
+
+rowGap, columnGap 활용하여 아이템간 간격을 지정할 수 있습니다.
+
+<Canvas>
+  <Story name="Gap">{(props) => <GridList {...props} />}</Story>
+</Canvas>
+
+<ArgsTable story="Gap" include={['rowGap', 'columnGap']} />
