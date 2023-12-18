@@ -1,5 +1,10 @@
 import { RESTORE_DELAY } from '@constants/restore'
+import styled from '@emotion/styled'
+import fallbackThumbnailImg from 'public/images/fallback_thumbnail.png'
 import React, { ErrorInfo, ReactNode } from 'react'
+import { Image } from '../Image'
+import { Paper } from '../Paper'
+import { Row } from '../Row'
 
 interface ErrorBoundaryProps {
   children: ReactNode
@@ -28,7 +33,19 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
 
   render() {
     if (this.state.hasError) {
-      return <h2>3D 모델을 출력하는데 문제가 발생했습니다. 잠시 후 자동으로 다시 시도합니다...</h2>
+      return (
+        <Paper bgColor={'temp.#AA9788'}>
+          <Row overflow={'hidden'} p={20}>
+            <StyledImage
+              src={fallbackThumbnailImg}
+              alt={'fallback thumbnail image'}
+              width={400}
+              height={400}
+              background={false}
+            />
+          </Row>
+        </Paper>
+      )
     }
 
     return this.props.children
@@ -36,3 +53,13 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
 }
 
 export default ErrorBoundary
+
+const StyledImage = styled(Image)`
+  img {
+    width: auto;
+    height: 400px;
+    object-fit: contain;
+    border-radius: 12px;
+    z-index: 5;
+  }
+`
