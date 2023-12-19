@@ -47,7 +47,7 @@ export const TreeDetailsPage: FC<TreeDetailsPageProps> = ({ className }) => {
           <StyledPaper>
             <Column style={{ zIndex: 2 }}>
               <TreeViewer />
-              <Row align={'center'} justify={'between'} mt={-50} mr={10}>
+              <Row align={'center'} justify={'between'} mt={-50} mx={10}>
                 <StyledButtonPaper bgColor={'temp.#2d396855'} radius={30}>
                   <Row p={10} cursor={'pointer'} onClick={onClickScanButton}>
                     <Image src={scanIconImg} width={24} height={24} alt={'edit icon image'} background={false} />
