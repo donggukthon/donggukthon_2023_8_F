@@ -14,7 +14,7 @@ import { useTreeDetailsPageUrlParam } from '@pages/tree/details/[treeId]'
 import { useRouter } from 'next/router'
 import editIconImg from 'public/images/edit_icon.png'
 import scanIconImg from 'public/images/scan_icon.png'
-import treeDetailsBackground3Img from 'public/images/tree_details_background_3.png'
+import treeDetailsBackground3Img from 'public/images/tree_details_background_4.png'
 import { FC, useEffect, useState } from 'react'
 
 type TreeDetailsPageProps = {

@@ -253,7 +253,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({
   userId,
   onSubmit,
 }) => {
-  const { showAlarmToast } = useToast()
+  const { showAlarmToast, showSuccessToast } = useToast()
   const { state: autoRotate, toggleState: toggleAutoRotate } = useBooleanState(true)
   const [selectedDecorationIndex, setSelectedDecorationIndex] = useState<number>(0)
   const [selectedDecorationType, setSelectedDecorationType] = useState<DecorationTypeType>('TREE')
@@ -265,6 +265,8 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({
   }
   const onClickCompleteButton = () => {
     onSubmit(testTreeList[0])()
+    push('/tree/details/1')
+    showSuccessToast({ message: '저장이 완료되었습니다.' })
     return
   }
 
