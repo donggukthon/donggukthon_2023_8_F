@@ -6,6 +6,42 @@ import styled from '@emotion/styled'
 import { OrbitControls, useGLTF } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import * as THREE from 'three'
+
+const Snow = ({ radius, centerPosition, rangeRadius, isSnowing }) => {
+  const snowRef = useRef(null)
+  const position = new THREE.Vector3(
+    centerPosition.x - rangeRadius + Math.random() * rangeRadius * 2,
+    centerPosition.y + rangeRadius + Math.random() * 2 * rangeRadius,
+    centerPosition.z - rangeRadius + Math.random() * rangeRadius * 2
+  )
+
+  const snow = useGLTF(`/models/snow_flake_1.glb`).scene.clone()
+
+  snow.position.set(position.x, position.y, position.z)
+  snow.scale.set(radius, radius, radius)
+  snow.rotation.y = Math.random()
+  useFrame((_, delta) => {
+    const snow = snowRef.current
+    const speed = 0.3 * delta
+    if (snow) {
+      if (snow.position.y <= 0) {
+        snow.position.y = centerPosition.y + rangeRadius + Math.random() * rangeRadius * 0.005
+      }
+      snow.position.y -= speed
+      snow.rotation.y += speed
+
+      if (snow.position.distanceTo(centerPosition) > rangeRadius - 0.1) {
+        snow.visible = false
+      } else {
+        snow.visible = true
+      }
+    }
+  })
+  if (isSnowing) return null
+
+  return <primitive object={snow} ref={snowRef} />
+}
 
 const GLBDecorationModel = ({ color, url, position, scale, rotate, isVisible = false }) => {
   const gltf = useGLTF(url, true)
@@ -119,6 +155,14 @@ const GroupModel = ({ autoRotate, decorationList, index, order, incrementValue }
   )
 }
 
+function FixedZCamera() {
+  useFrame(({ camera }) => {
+    camera.position.y = 5
+  })
+
+  return null
+}
+
 const CanvasComponent = ({
   cameraPosition = [0, 0, 5],
   cameraFov = 20,
@@ -127,10 +171,25 @@ const CanvasComponent = ({
   order = 2,
   incrementValue = 0,
   height = 500,
+  isSnowing = false,
 }) => {
   const [isMounted, setIsMounted] = useState(false)
   const cameraRef = useRef(null)
   const orbitRef = useRef(null)
+
+  const glassRadius = 1
+  const glassPosition = new THREE.Vector3(0, glassRadius / 2, 0)
+
+  const snows = Array.from({ length: 70 }, (_, i) => (
+    <Snow
+      key={i}
+      isSnowing={isSnowing}
+      centerPosition={glassPosition}
+      rangeRadius={glassRadius}
+      radius={0.05 + Math.random() * 0.1}
+      model={Math.floor(Math.random() * 3)}
+    />
+  ))
 
   useEffect(() => {
     setIsMounted(true)
@@ -142,9 +201,12 @@ const CanvasComponent = ({
 
   return (
     <>
-      <StyledCanvas camera={{ fov: cameraFov, position: cameraPosition }} height={height}>
-        <ambientLight intensity={0.7} />
-        <directionalLight position={[0, 0, 5]} />
+      <StyledCanvas camera={{ fov: cameraFov, position: cameraPosition }} height={height} ref={cameraRef}>
+        <ambientLight intensity={1} color={'#cfcabb'} />
+        <directionalLight position={[5, 7, 3]} intensity={2} color={'#f1e0c8'} castShadow />
+        <directionalLight position={[5, 7, -3]} intensity={2} color={'#f1e0c8'} castShadow />
+        <directionalLight position={[-5, 7, 0]} intensity={2} color={'#f1e0c8'} castShadow />
+        {snows}
         {testTreeList.map((value, index) => (
           <GroupModel
             autoRotate={autoRotate}
@@ -155,7 +217,14 @@ const CanvasComponent = ({
             key={`group_model_${index}`}
           />
         ))}
-        <OrbitControls ref={orbitRef} enableZoom={false} enablePan={false} target={[0, 0, 0]} />
+        <OrbitControls
+          ref={orbitRef}
+          enablePan={true}
+          enableZoom={true}
+          maxPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 4}
+          target={[0, 0, 0]}
+        />
       </StyledCanvas>
     </>
   )
