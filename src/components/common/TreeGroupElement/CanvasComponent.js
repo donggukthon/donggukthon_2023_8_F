@@ -210,6 +210,7 @@ const CanvasComponent = ({
             key={`group_model_${index}`}
           />
         ))}
+        {/* <Bottom bottomID={1} scale={0.05} position={new THREE.Vector3(0, -0.14, 0)} title={'hi'} color={'#ffffff'} /> */}
         <OrbitControls
           ref={orbitRef}
           enablePan={false}

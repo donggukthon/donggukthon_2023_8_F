@@ -208,3 +208,10 @@ input:-webkit-autofill:active {
     url('../public/fonts/NotoSansKR-Regular.ttf') format('truetype'),
     url('../public/fonts/NotoSansKR-Thin.otf') format('opentype');
 }
+
+@font-face {
+  font-family: 'KingSejongInstitute';
+  src: url('/fonts/KingSejongInstitute-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}

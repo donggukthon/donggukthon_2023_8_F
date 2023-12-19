@@ -13,7 +13,6 @@ import googleIconImage from 'public/images/google_icon.png'
 import mainDecoration1Img from 'public/images/main_decoration_1.png'
 import mainDecoration2Img from 'public/images/main_decoration_2.png'
 import mainDecoration3Img from 'public/images/main_decoration_3.png'
-import mainTitleTypoImg from 'public/images/main_title_typo.png'
 import { FC } from 'react'
 import { MainTreeCanvas } from '../MainTreeCanvas'
 
@@ -76,13 +75,9 @@ export const MainPage: FC<MainPageProps> = ({ className }) => {
                 </Position>
                 <Position position={'absolute'} top={150}>
                   <StyledCenterColumn gap={15} align={'center'} p={10}>
-                    <Image
-                      src={mainTitleTypoImg}
-                      alt={'main title typo image'}
-                      width={230}
-                      height={32}
-                      background={false}
-                    />
+                    <StyledTitleFont type={['body-18-regular', 'heading-20-regular']} color={'white'}>
+                      나만의 3D 트리
+                    </StyledTitleFont>
                   </StyledCenterColumn>
                 </Position>
                 <Position position={'absolute'} top={0} left={0}>
@@ -157,4 +152,12 @@ const StyledWreathImage = styled(Image)`
   top: 60px;
   left: 50%;
   transform: translate(-50%, -50%);
+`
+
+const StyledTitleFont = styled(Font)`
+  &&& {
+    font-family: 'KingSejongInstitute';
+    /* color: rgb(231, 173, 86); */
+    color: white;
+  }
 `
