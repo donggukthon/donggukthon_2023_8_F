@@ -20,6 +20,31 @@ import decorationIcon6Img from 'public/images/decoration_icon_6.png'
 import { FC, useEffect, useState } from 'react'
 import { DecorationTypeType, getIndexByDecorationType } from './utils'
 
+const getRandomPosition = () => {
+  let floorList = ['1', '2', '3', '4']
+  let randomFloor = Math.floor(Math.random() * 4)
+  let randomDegree = Math.floor(Math.random() * 100)
+
+  return {
+    position: getPositionByFloorAndRadian(floorList[randomFloor] as any, randomDegree),
+    floor: floorList[randomFloor] as any,
+    degree: randomDegree,
+  }
+}
+
+const getPositionByFloorAndRadian = (floor: '1' | '2' | '3' | '4', radian: number) => {
+  if (floor === '1') {
+    return [0.2 * Math.sin((radian * Math.PI) / 180), -0.07, 0.2 * Math.cos((radian * Math.PI) / 180)]
+  }
+  if (floor === '2') {
+    return [0.17 * Math.sin((radian * Math.PI) / 180), 0.05, 0.17 * Math.cos((radian * Math.PI) / 180)]
+  }
+  if (floor === '3') {
+    return [0.12 * Math.sin((radian * Math.PI) / 180), 0.25, 0.12 * Math.cos((radian * Math.PI) / 180)]
+  }
+  return [0, 0.4, 0]
+}
+
 type TreeCustomizeEditorProps = {
   className?: string
 }
@@ -117,9 +142,74 @@ const decorationFileList = [
   },
 ]
 
-const DEFAULT_POSITION = [0, 0.2, -0.4]
+const RANDOM_DECORATION_LIST = [
+  {
+    decorationType: 'DECORATION_6',
+    url: '/models/decoration_6_1.glb',
+    scale: [0.23, 0.23, 0.23],
+  },
+  {
+    decorationType: 'DECORATION_6',
+    url: '/models/decoration_6_2.glb',
+    scale: [0.23, 0.23, 0.23],
+  },
+  {
+    decorationType: 'DECORATION_7',
+    url: '/models/decoration_7_1.glb',
+    scale: [0.25, 0.25, 0.25],
+  },
+  {
+    decorationType: 'DECORATION_7',
+    url: '/models/decoration_7_2.glb',
+    scale: [0.25, 0.25, 0.25],
+  },
+  {
+    decorationType: 'DECORATION_7',
+    url: '/models/decoration_7_3.glb',
+    scale: [0.25, 0.25, 0.25],
+  },
+  {
+    decorationType: 'DECORATION_8',
+    url: '/models/decoration_8_1.glb',
+    scale: [0.35, 0.35, 0.35],
+  },
+  {
+    decorationType: 'DECORATION_8',
+    url: '/models/decoration_8_2.glb',
+    scale: [0.35, 0.35, 0.35],
+  },
+  {
+    decorationType: 'DECORATION_8',
+    url: '/models/decoration_8_3.glb',
+    scale: [0.35, 0.35, 0.35],
+  },
+  {
+    decorationType: 'DECORATION_5',
+    url: '/models/decoration_5_1.glb',
+    scale: [0.15, 0.15, 0.15],
+  },
+  {
+    decorationType: 'DECORATION_5',
+    url: '/models/decoration_5_2.glb',
+    scale: [0.15, 0.15, 0.15],
+  },
+  {
+    decorationType: 'DECORATION_5',
+    url: '/models/decoration_5_3.glb',
+    scale: [0.15, 0.15, 0.15],
+  },
+]
+
+const getRandomDecoration = () => {
+  let length = RANDOM_DECORATION_LIST.length
+  let randomIndex = Math.floor(Math.random() * length)
+  return RANDOM_DECORATION_LIST[randomIndex]
+}
 
 // 4: 팔찌, 5: 지팡이, 6: 종, 7: 선물상자, 8: 별
+
+const defaultRandomPosition = getRandomPosition()
+const defaultRandomDecoration = getRandomDecoration()
 
 const DEFAULT_DATA = [
   {
@@ -132,14 +222,18 @@ const DEFAULT_DATA = [
         scale: [0.3, 0.3, 0.3],
         rotate: [0, 0, 0],
         type: 'GLB',
+        floor: null,
+        degree: null,
       },
       {
-        decorationType: 'DECORATION_5',
-        url: '/models/decoration_5_2.glb',
-        position: DEFAULT_POSITION,
-        scale: [0.1, 0.1, 0.1],
+        decorationType: defaultRandomDecoration.decorationType,
+        url: defaultRandomDecoration.url,
+        scale: defaultRandomDecoration.scale,
+        position: defaultRandomPosition.position,
         rotate: [0.2, 0.3, 0.4],
         type: 'GLB',
+        floor: defaultRandomPosition.floor,
+        degree: defaultRandomPosition.degree,
       },
     ],
   },
@@ -181,69 +275,6 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
     })
   }
 
-  const onClickPosition = (index: number, direction: DirectionType) => () => {
-    if (direction === 'RESET') {
-      _setTestTreeList((prev) => {
-        const newPosition = [DEFAULT_POSITION[0], DEFAULT_POSITION[1], DEFAULT_POSITION[2]]
-        const newDecorationList = prev[0].decorationList.map((value2, index2) =>
-          index === index2 ? { ...value2, position: [...newPosition] } : { ...value2 }
-        ) as any
-        return [
-          {
-            ...prev[0],
-            decorationList: newDecorationList,
-          },
-        ]
-      })
-      return
-    }
-    if (direction === 'RIGHT') {
-      _setTestTreeList((prev) => {
-        const newPosition = [DEFAULT_POSITION[2], DEFAULT_POSITION[1], DEFAULT_POSITION[0]]
-        const newDecorationList = prev[0].decorationList.map((value2, index2) =>
-          index === index2 ? { ...value2, position: [...newPosition] } : { ...value2 }
-        ) as any
-        return [
-          {
-            ...prev[0],
-            decorationList: newDecorationList,
-          },
-        ]
-      })
-      return
-    }
-    if (direction === 'LEFT') {
-      _setTestTreeList((prev) => {
-        const newPosition = [-1 * DEFAULT_POSITION[2], DEFAULT_POSITION[1], DEFAULT_POSITION[0]]
-        const newDecorationList = prev[0].decorationList.map((value2, index2) =>
-          index === index2 ? { ...value2, position: [...newPosition] } : { ...value2 }
-        ) as any
-        return [
-          {
-            ...prev[0],
-            decorationList: newDecorationList,
-          },
-        ]
-      })
-      return
-    }
-    if (direction === 'OPPOSITE') {
-      _setTestTreeList((prev) => {
-        const newPosition = [DEFAULT_POSITION[0], DEFAULT_POSITION[1], -1 * DEFAULT_POSITION[2]]
-        const newDecorationList = prev[0].decorationList.map((value2, index2) =>
-          index === index2 ? { ...value2, position: [...newPosition] } : { ...value2 }
-        ) as any
-        return [
-          {
-            ...prev[0],
-            decorationList: newDecorationList,
-          },
-        ]
-      })
-      return
-    }
-  }
-
   const onChangeSlider = (index: number) => (value: number) => {
     if (isNaN(value)) {
       return
@@ -262,6 +293,9 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
   }
 
   const onClickCreateButton = () => {
+    const newRandomDecoration = getRandomDecoration()
+    const newRandomPosition = getRandomPosition()
+
     if (testTreeList[0].decorationList.length >= 6) {
       showAlarmToast({ message: '장식의 최대 개수를 초과했습니다.' })
       return
@@ -270,10 +304,12 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
       const newDecorationList = [
         ...prev[0].decorationList,
         {
-          decorationType: 'DECORATION_5',
-          url: '/models/decoration_5_2.glb',
-          position: DEFAULT_POSITION,
-          scale: [0.2, 0.2, 0.2],
+          decorationType: newRandomDecoration.decorationType,
+          url: newRandomDecoration.url,
+          scale: newRandomDecoration.scale,
+          position: newRandomPosition.position,
+          floor: newRandomPosition.floor,
+          degree: newRandomPosition.degree,
           rotate: [0.2, 0.3, 0.4],
           type: 'GLB',
         },
@@ -300,8 +336,43 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
         },
       ]
     })
-
     return
+  }
+
+  const onClickFloorButton = (index: number, floor: '1' | '2' | '3' | '4') => () => {
+    const newPosition = getPositionByFloorAndRadian(floor, 0)
+
+    _setTestTreeList((prev) => {
+      const newDecorationList = prev[0].decorationList.map((value2, index2) =>
+        index === index2 ? { ...value2, position: [...newPosition], floor } : { ...value2 }
+      ) as any
+      return [
+        {
+          ...prev[0],
+          decorationList: newDecorationList,
+        },
+      ]
+    })
+    return
+  }
+
+  const onChangeDegreeSlider = (index: number) => (value: number) => {
+    if (isNaN(value)) {
+      return
+    }
+    _setTestTreeList((prev) => {
+      const newDecorationList = prev[0].decorationList.map((value2, index2) =>
+        index === index2
+          ? { ...value2, position: getPositionByFloorAndRadian(value2.floor, value), degree: value }
+          : { ...value2 }
+      ) as any
+      return [
+        {
+          ...prev[0],
+          decorationList: newDecorationList,
+        },
+      ]
+    })
   }
 
   useEffect(() => {
@@ -531,7 +602,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
                 </Row>
                 <Space height={[20, 30]} />
                 {selectedDecorationType !== 'TREE' && (
-                  <Row gap={20} align={'center'}>
+                  <Row gap={20} align={'center'} height={32}>
                     <Row width={30}>
                       <Font type={['heading-12-medium', 'heading-14-medium']} color={'gray.800'} wordBreak={'keep-all'}>
                         크기
@@ -547,51 +618,69 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
                     />
                   </Row>
                 )}
-                <Space height={[5, 15]} />
+                <Space height={[20, 30]} />
                 {selectedDecorationType !== 'TREE' && (
                   <Row gap={20} align={'center'}>
                     <Row width={30}>
                       <Font type={['heading-12-medium', 'heading-14-medium']} color={'gray.800'} wordBreak={'keep-all'}>
-                        위치
+                        층수
                       </Font>
                     </Row>
                     <Row gap={10} wrap={'wrap'}>
                       <ContainedButton
                         kind={'secondary-gray'}
                         size={'sm'}
-                        onClick={onClickPosition(selectedDecorationIndex, 'RESET')}
+                        onClick={onClickFloorButton(selectedDecorationIndex, '1')}
                         style={{ marginBottom: 5, marginTop: 5 }}
                       >
-                        리셋
+                        1층
                       </ContainedButton>
                       <ContainedButton
                         kind={'secondary-gray'}
                         size={'sm'}
-                        onClick={onClickPosition(selectedDecorationIndex, 'RIGHT')}
+                        onClick={onClickFloorButton(selectedDecorationIndex, '2')}
                         style={{ marginBottom: 5, marginTop: 5 }}
                       >
-                        90도 오른쪽
+                        2층
                       </ContainedButton>
                       <ContainedButton
                         kind={'secondary-gray'}
                         size={'sm'}
-                        onClick={onClickPosition(selectedDecorationIndex, 'LEFT')}
+                        onClick={onClickFloorButton(selectedDecorationIndex, '3')}
                         style={{ marginBottom: 5, marginTop: 5 }}
                       >
-                        90도 왼쪽
+                        3층
                       </ContainedButton>
                       <ContainedButton
                         kind={'secondary-gray'}
                         size={'sm'}
-                        onClick={onClickPosition(selectedDecorationIndex, 'OPPOSITE')}
+                        onClick={onClickFloorButton(selectedDecorationIndex, '4')}
                         style={{ marginBottom: 5, marginTop: 5 }}
                       >
-                        정반대
+                        4층
                       </ContainedButton>
                     </Row>
                   </Row>
                 )}
-                <Space height={20} />
+                <Space height={[20, 30]} />
+                {selectedDecorationType !== 'TREE' && (
+                  <Row gap={20} align={'center'} height={32}>
+                    <Row width={30}>
+                      <Font type={['heading-12-medium', 'heading-14-medium']} color={'gray.800'} wordBreak={'keep-all'}>
+                        각도
+                      </Font>
+                    </Row>
+                    <Slider
+                      style={{ width: 200, marginTop: 5, marginBottom: 5 }}
+                      min={1}
+                      max={360}
+                      value={selectedDecorationItem.degree as number}
+                      onChange={onChangeDegreeSlider(selectedDecorationIndex)}
+                      step={1}
+                    />
+                  </Row>
+                )}
+                <Space height={[10, 20]} />
                 <Row width={'100%'} height={30} justify={'end'}>
                   {selectedDecorationIndex !== 0 && (
                     <ContainedButton
