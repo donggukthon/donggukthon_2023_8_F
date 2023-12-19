@@ -31,19 +31,21 @@ export const TreeDetailsPage: FC<TreeDetailsPageProps> = ({ className }) => {
 
   return (
     <Position position={'relative'}>
-      <Column>
+      <Column className={className}>
         <StyledPosition position={'absolute'} top={250} style={{ zIndex: 0 }}>
-          <StyledImage
-            src={treeDetailsBackground3Img}
-            alt={'tree details background image'}
-            width={1200}
-            height={500}
-            background={false}
-          />
+          <StyledImageWrapper>
+            <StyledImage
+              src={treeDetailsBackground3Img}
+              alt={'tree details background image'}
+              width={500}
+              height={500}
+              background={false}
+            />
+          </StyledImageWrapper>
         </StyledPosition>
         <Container size={'sm'}>
-          <StyledPaper minHeight={'100vh'}>
-            <Column className={className} style={{ zIndex: 2 }}>
+          <StyledPaper>
+            <Column style={{ zIndex: 2 }}>
               <TreeViewer />
               <Row align={'center'} justify={'between'} mt={-50} mr={10}>
                 <StyledButtonPaper bgColor={'temp.#2d396855'} radius={30}>
@@ -53,7 +55,14 @@ export const TreeDetailsPage: FC<TreeDetailsPageProps> = ({ className }) => {
                 </StyledButtonPaper>
                 <StyledButtonPaper bgColor={'temp.#2d396855'} radius={30}>
                   <Row p={10} cursor={'pointer'} onClick={onClickCustomizeTreeButton}>
-                    <Image src={editIconImg} width={24} height={24} alt={'edit icon image'} background={false} />
+                    <Image
+                      src={editIconImg}
+                      width={24}
+                      height={24}
+                      alt={'edit icon image'}
+                      background={false}
+                      draggable={false}
+                    />
                   </Row>
                 </StyledButtonPaper>
               </Row>
@@ -80,11 +89,19 @@ const StyledPosition = styled(Position)`
   transform: translate(-50%, -50%);
 `
 
+const StyledImageWrapper = styled.span`
+  max-width: 500px;
+  min-width: 320px;
+  overflow: hidden;
+`
+
 const StyledImage = styled(Image)`
   width: 1200px;
   z-index: 0;
   img {
     width: 1200px;
     height: auto;
+    object-fit: cover;
+    margin-left: calc(-60%);
   }
 `
