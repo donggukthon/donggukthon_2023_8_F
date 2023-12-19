@@ -1,17 +1,17 @@
-import React, { FC, ReactElement } from 'react'
-import styles from './style.module.scss'
-import cx from 'classnames'
+import { Portal } from '@components/common/Portal'
 import { useControlledState } from '@hooks/useControlledState'
 import { useLockBodyScroll } from '@hooks/useLockBodyScroll'
-import { Portal } from '@components/common/Portal'
+import cx from 'classnames'
+import { FC, ReactElement } from 'react'
 import { Box } from '../Box'
 import { Position } from '../Position'
 import { Row } from '../Row'
+import styles from './style.module.scss'
 
 const MOBILE_WIDTH = 'calc(100vw - 40px)'
 const sizePropVariant = {
   sm: {
-    contentWidth: 480,
+    contentWidth: 375,
   },
   md: {
     contentWidth: 540,

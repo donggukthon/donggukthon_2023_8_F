@@ -2,6 +2,7 @@ import { Column } from '@components/common/Column'
 import { Container } from '@components/common/Container'
 import { Font } from '@components/common/Font'
 import { Image } from '@components/common/Image'
+import { IntroduceModal } from '@components/common/IntroduceModal'
 import { Paper } from '@components/common/Paper'
 import { Position } from '@components/common/Position'
 import { Row } from '@components/common/Row'
@@ -86,21 +87,7 @@ export const MainPage: FC<MainPageProps> = ({ className }) => {
                 </Position>
                 <Position position={'absolute'} top={635}>
                   <StyledColumn width={'100%'} gap={20}>
-                    <Paper bgColor={'temp.#BC5952'} radius={12}>
-                      <Row
-                        px={16}
-                        py={10}
-                        height={45}
-                        justify={'center'}
-                        align={'center'}
-                        cursor={'pointer'}
-                        onClick={onClickTestLoginButton}
-                      >
-                        <StyledTitleFont type={'btn-16-medium'} color={'white'}>
-                          소개페이지
-                        </StyledTitleFont>
-                      </Row>
-                    </Paper>
+                    <IntroduceModal />
                     <Paper bgColor={'temp.#588C7E'} radius={12}>
                       <Row
                         px={16}
