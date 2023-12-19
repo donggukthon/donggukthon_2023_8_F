@@ -1,5 +1,11 @@
-import { Font } from '@components/common/Font'
+import { Column } from '@components/common/Column'
+import { Container } from '@components/common/Container'
+import { Image } from '@components/common/Image'
 import { Link } from '@components/common/Link'
+import { Paper } from '@components/common/Paper'
+import { Position } from '@components/common/Position'
+import styled from '@emotion/styled'
+import errorBackgroundImg from 'public/images/error_background.png'
 import { FC } from 'react'
 
 type NotFoundPageProps = {
@@ -8,11 +14,27 @@ type NotFoundPageProps = {
 
 export const NotFoundPage: FC<NotFoundPageProps> = ({ className }) => {
   return (
-    <div className={className}>
-      <Font type={'body-10-regular'}>찾을 수 없는 페이지입니다. 문제가 지속되면 고객센터로 문의해주세요.</Font>
-      <Link href="/">
-        <Font type={'body-10-regular'}>메인페이지 바로가기</Font>
-      </Link>
-    </div>
+    <Position position={'relative'}>
+      <Column className={className}>
+        <Container size={'sm'}>
+          <Link href="/">
+            <StyledPaper bgColor={'white'} minHeight={'100vh'}>
+              <StyledImage src={errorBackgroundImg} alt={'error background Image'} width={400} height={400} />
+            </StyledPaper>
+          </Link>
+        </Container>
+      </Column>
+    </Position>
   )
 }
+
+const StyledPaper = styled(Paper)`
+  /* background: linear-gradient(179.99deg, #997052 0.01%, rgba(187, 152, 127, 0) 113.53%); */
+`
+
+const StyledImage = styled(Image)`
+  img {
+    width: auto;
+    height: 100vh;
+  }
+`

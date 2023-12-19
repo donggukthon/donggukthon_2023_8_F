@@ -139,7 +139,7 @@ const StyledCenterColumn = styled(Column)`
 `
 
 const StyledColumn = styled(Column)`
-  width: calc(100% - 40px);
+  width: calc(100% - 60px);
   left: 50%;
   transform: translate(-50%, -50%);
 `
