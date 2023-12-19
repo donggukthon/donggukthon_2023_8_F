@@ -16,7 +16,7 @@ const Cal3 = (t: number) => {
 }
 export const TREE_VIEWER_TEST_DATA = [
   {
-    name: '베타테스터',
+    name: '베타테스터1',
     decorationList: [
       {
         decorationType: 'TREE',
@@ -85,7 +85,7 @@ export const TREE_VIEWER_TEST_DATA = [
     ],
   },
   {
-    name: '베타테스터',
+    name: '베타테스터2',
     decorationList: [
       {
         decorationType: 'TREE',
@@ -138,7 +138,7 @@ export const TREE_VIEWER_TEST_DATA = [
     ],
   },
   {
-    name: '베타테스터',
+    name: '베타테스터3',
     decorationList: [
       {
         decorationType: 'TREE',

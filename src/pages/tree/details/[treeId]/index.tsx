@@ -6,6 +6,7 @@ import { Position } from '@components/common/Position'
 import { Space } from '@components/common/Space'
 import { TreeDetailsPage as TreeDetailsPageComponent } from '@components/tree/details/TreeDetailsPage'
 import { FOOTER_HEIGHT, HEADER_HEIGHT, MOBILE_ROOT_MAX_WIDTH } from '@constants/layout'
+import { useUrlParam } from '@hooks/useUrlParam'
 import { MetaTags } from '@libs/seo'
 import { getUrl } from '@utils/getUrl'
 import type { NextPage } from 'next'
@@ -30,5 +31,11 @@ const TreeDetailsPage: NextPage<TreeDetailsPageProps> = () => (
     </Paper>
   </Position>
 )
+
+export const useTreeDetailsPageUrlParam = () => {
+  const treeId = useUrlParam('treeId', '')[0]
+
+  return { treeId }
+}
 
 export default TreeDetailsPage

@@ -13,19 +13,21 @@ import arrowCircleRightIconImg from 'public/images/arrow_circle_right_icon.png'
 import { FC, useState } from 'react'
 import { AutoRotateSwitch } from '../AutoRotateSwitch/'
 import { ChristmasLetterModal } from '../details/ChirstmasLetterModal'
-import { TREE_VIEWER_TEST_DATA } from './constant'
 
 type TreeViewerProps = {
   className?: string
+  treeList: any
+  treeId: number
 }
 
-export const TreeViewer: FC<TreeViewerProps> = ({ className }) => {
+export const TreeViewer: FC<TreeViewerProps> = ({ className, treeList, treeId }) => {
   const [name, _setName] = useState('테스트')
   const [content, _setContent] = useState('테스트입니다 테스트입니다')
   const { state: autoRotate, toggleState: toggleAutoRotate } = useBooleanState(true)
-  const [testTreeList, _setTestTreeList] = useState(TREE_VIEWER_TEST_DATA)
-  const [order, setOrder] = useState<number>(2)
+  const [order, setOrder] = useState<number>(+treeId)
   const { value } = useIncrementalValue(order, 300)
+
+  const testTreeList = treeList
 
   const onClickPrevious = () => {
     setOrder((prev) => {
