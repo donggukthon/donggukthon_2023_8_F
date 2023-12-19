@@ -600,7 +600,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
                     </Paper>
                   ))}
                 </Row>
-                <Space height={[20, 30]} />
+                {selectedDecorationType !== 'TREE' && <Space height={[20, 30]} />}
                 {selectedDecorationType !== 'TREE' && (
                   <Row gap={20} align={'center'} height={32}>
                     <Row width={30}>
@@ -618,7 +618,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
                     />
                   </Row>
                 )}
-                <Space height={[20, 30]} />
+                {selectedDecorationType !== 'TREE' && <Space height={[20, 30]} />}
                 {selectedDecorationType !== 'TREE' && (
                   <Row gap={20} align={'center'}>
                     <Row width={30}>
@@ -662,7 +662,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
                     </Row>
                   </Row>
                 )}
-                <Space height={[20, 30]} />
+                {selectedDecorationType !== 'TREE' && <Space height={[20, 30]} />}
                 {selectedDecorationType !== 'TREE' && (
                   <Row gap={20} align={'center'} height={32}>
                     <Row width={30}>
@@ -680,7 +680,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
                     />
                   </Row>
                 )}
-                <Space height={[10, 20]} />
+                {selectedDecorationType !== 'TREE' && <Space height={[10, 20]} />}
                 <Row width={'100%'} height={30} justify={'end'}>
                   {selectedDecorationIndex !== 0 && (
                     <ContainedButton
