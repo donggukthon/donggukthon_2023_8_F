@@ -1,10 +1,9 @@
-import { ContainedButton } from '@components/common/Button/ContainedButton'
 import { Column } from '@components/common/Column'
 import { Container } from '@components/common/Container'
 import { Paper } from '@components/common/Paper'
-import { Row } from '@components/common/Row'
-import { useRouter } from 'next/router'
-import { FC } from 'react'
+import { TREE_VIEWER_TEST_DATA } from '@components/tree/TreeViewer/constant'
+import { useLocalStorage } from '@hooks/useLocalStorage'
+import { FC, useEffect, useState } from 'react'
 import { TreeCustomizeEditor } from '../TreeCustomizeEditor'
 
 type TreeCustomizePageProps = {
@@ -12,29 +11,42 @@ type TreeCustomizePageProps = {
 }
 
 export const TreeCustomizePage: FC<TreeCustomizePageProps> = ({ className }) => {
-  const { push } = useRouter()
+  const {
+    value: localTestTreeList,
+    setItem: setItemTestTreeList,
+    removeItem: removeItemTestTreeList,
+  } = useLocalStorage('test-tree-list')
+  const { value: testLogin } = useLocalStorage('test-login')
+  const userTestLogin: any = testLogin ?? '1'
+  const [testTreeList, setTestTreeList] = useState<any>()
 
-  const onClickCancelButton = () => {
-    push('/tree/details/1')
-    return
+  const onSubmit = (testTreeData: any) => () => {
+    let newTestTreeList = testTreeList.map((value: any, index: number) =>
+      index === +userTestLogin ? testTreeData : value
+    )
+    removeItemTestTreeList()
+    setItemTestTreeList(JSON.stringify(newTestTreeList))
   }
-  const onClickCompleteButton = () => {
-    return
-  }
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (!localTestTreeList) {
+        setItemTestTreeList(JSON.stringify(TREE_VIEWER_TEST_DATA))
+        setTestTreeList(TREE_VIEWER_TEST_DATA)
+      } else {
+        setTestTreeList(JSON.parse(localTestTreeList as string))
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Container size={'sm'}>
       <Paper>
         <Column className={className} minHeight={'100vh'} pb={40}>
-          <TreeCustomizeEditor />
-          <Row mt={20} width={'100%'} justify={'end'} gap={10} pr={20}>
-            <ContainedButton kind={'secondary-accent'} size={'md'} onClick={onClickCancelButton}>
-              뒤로가기
-            </ContainedButton>
-            <ContainedButton kind={'cta'} size={'md'} onClick={onClickCompleteButton}>
-              완료
-            </ContainedButton>
-          </Row>
+          {testTreeList && userTestLogin && (
+            <TreeCustomizeEditor testTreeList={testTreeList} userId={+userTestLogin as number} onSubmit={onSubmit} />
+          )}
         </Column>
       </Paper>
     </Container>

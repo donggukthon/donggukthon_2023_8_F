@@ -60,3 +60,17 @@ export type SubmissionItemType = {
   sendMessage?: string
   isActive?: boolean
 } & CommonModelType
+
+export type TestTreeListType = {
+  name: string
+  decorationList: {
+    decorationType: any
+    url: string
+    position: [number, number, number] | any
+    scale: [number, number, number] | any
+    rotate: [number, number, number] | any
+    type: string
+    floor: any
+    degree: number
+  }[]
+}[]

@@ -12,12 +12,14 @@ import { AutoRotateSwitch } from '@components/tree/AutoRotateSwitch'
 import styled from '@emotion/styled'
 import { useBooleanState } from '@hooks/useBooleanState'
 import { Slider } from 'antd'
+import { useRouter } from 'next/router'
 import decorationIcon1Img from 'public/images/decoration_icon_1.png'
 import decorationIcon2Img from 'public/images/decoration_icon_2.png'
 import decorationIcon4Img from 'public/images/decoration_icon_4.png'
 import decorationIcon5Img from 'public/images/decoration_icon_5.png'
 import decorationIcon6Img from 'public/images/decoration_icon_6.png'
 import { FC, useEffect, useState } from 'react'
+import { TestTreeListType } from 'types/common'
 import { DecorationTypeType, getIndexByDecorationType } from './utils'
 
 const getRandomPosition = () => {
@@ -47,6 +49,9 @@ const getPositionByFloorAndRadian = (floor: '1' | '2' | '3' | '4', radian: numbe
 
 type TreeCustomizeEditorProps = {
   className?: string
+  testTreeList: any
+  userId: number
+  onSubmit: (_value: any) => () => void
 }
 
 const decorationFileList = [
@@ -239,17 +244,29 @@ const DEFAULT_DATA = [
   },
 ]
 
-type DirectionType = 'RESET' | 'RIGHT' | 'LEFT' | 'OPPOSITE'
-
 const DECORATION_ICON_DIVIDE_RATIO = 3
 const DECORATION_BUTTON_WIDTH = 60
 
-export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className }) => {
+export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({
+  className,
+  testTreeList: localTestTreeList,
+  userId,
+  onSubmit,
+}) => {
   const { showAlarmToast } = useToast()
   const { state: autoRotate, toggleState: toggleAutoRotate } = useBooleanState(true)
   const [selectedDecorationIndex, setSelectedDecorationIndex] = useState<number>(0)
   const [selectedDecorationType, setSelectedDecorationType] = useState<DecorationTypeType>('TREE')
-  const [testTreeList, _setTestTreeList] = useState(DEFAULT_DATA)
+  const [testTreeList, _setTestTreeList] = useState<TestTreeListType>([localTestTreeList[userId]])
+  const { push } = useRouter()
+  const onClickCancelButton = () => {
+    push('/tree/details/1')
+    return
+  }
+  const onClickCompleteButton = () => {
+    onSubmit(testTreeList[0])()
+    return
+  }
 
   const onClickSelectedDecorationIndex = (index: number) => () => {
     setSelectedDecorationIndex(index)
@@ -300,7 +317,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
       showAlarmToast({ message: '장식의 최대 개수를 초과했습니다.' })
       return
     }
-    _setTestTreeList((prev) => {
+    _setTestTreeList((prev: TestTreeListType) => {
       const newDecorationList = [
         ...prev[0].decorationList,
         {
@@ -386,7 +403,12 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
     <StyledPaper bgColor={'temp.#CEBAAC'}>
       <Column className={className}>
         <Column overflow={'hidden'} height={400}>
-          <ThreeElement testTreeList={testTreeList} height={400} cameraPosition={[0, 0, 4]} autoRotate={autoRotate} />
+          <ThreeElement
+            testTreeList={[testTreeList[0]]}
+            height={400}
+            cameraPosition={[0, 0, 4]}
+            autoRotate={autoRotate}
+          />
           <Row width={'100%'} justify={'end'} mt={-20} pr={15}>
             <AutoRotateSwitch checked={autoRotate} fontColor={'gray.700'} toggleAction={toggleAutoRotate} />
           </Row>
@@ -695,6 +717,14 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
               </Column>
             </Paper>
           </Border>
+          <Row mt={20} width={'100%'} justify={'end'} gap={10} pr={20}>
+            <ContainedButton kind={'secondary-accent'} size={'md'} onClick={onClickCancelButton}>
+              뒤로가기
+            </ContainedButton>
+            <ContainedButton kind={'cta'} size={'md'} onClick={onClickCompleteButton}>
+              완료
+            </ContainedButton>
+          </Row>
         </Column>
       </Column>
     </StyledPaper>

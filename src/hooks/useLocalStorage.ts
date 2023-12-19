@@ -19,7 +19,13 @@ export function useLocalStorage<T>(key: string): Storage<T>
 export function useLocalStorage<T>(key: string, initialValue: T): StorageWithInitialValue<T>
 export function useLocalStorage<T>(key: string, initialValue?: T) {
   const storageKey = `local-${key}`
-  const [value, setValue] = useState(initialValue)
+  const [value, setValue] = useState<T | undefined>(() => {
+    if (typeof window === 'undefined') {
+      return initialValue
+    }
+    const value = window.localStorage.getItem(storageKey)
+    return value ? JSON.parse(value) : initialValue
+  })
 
   const changeValue = useCallback(
     (event: StorageEvent) => {
