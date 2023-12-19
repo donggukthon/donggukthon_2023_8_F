@@ -4,16 +4,15 @@ import { Image } from '@components/common/Image'
 import { Paper } from '@components/common/Paper'
 import { Position } from '@components/common/Position'
 import { Row } from '@components/common/Row'
-import { useToast } from '@components/common/Toast'
 import { ThreeElement } from '@components/common/TreeGroupElement/ThreeElement'
 import styled from '@emotion/styled'
 import { useBooleanState } from '@hooks/useBooleanState'
 import { useIncrementalValue } from '@hooks/useIncrementValue'
 import arrowCircleLeftIconImg from 'public/images/arrow_circle_left_icon.png'
 import arrowCircleRightIconImg from 'public/images/arrow_circle_right_icon.png'
-import mailIconImg from 'public/images/mail_icon.png'
 import { FC, useState } from 'react'
 import { AutoRotateSwitch } from '../AutoRotateSwitch/'
+import { ChristmasLetterModal } from '../details/ChirstmasLetterModal'
 import { TREE_VIEWER_TEST_DATA } from './constant'
 
 type TreeViewerProps = {
@@ -21,7 +20,8 @@ type TreeViewerProps = {
 }
 
 export const TreeViewer: FC<TreeViewerProps> = ({ className }) => {
-  const { showAlarmToast } = useToast()
+  const [name, _setName] = useState('테스트')
+  const [content, _setContent] = useState('테스트입니다 테스트입니다')
   const { state: autoRotate, toggleState: toggleAutoRotate } = useBooleanState(true)
   const [testTreeList, _setTestTreeList] = useState(TREE_VIEWER_TEST_DATA)
   const [order, setOrder] = useState<number>(2)
@@ -43,9 +43,6 @@ export const TreeViewer: FC<TreeViewerProps> = ({ className }) => {
       return prev
     })
   }
-  const onClickShareButton = () => {
-    showAlarmToast({ message: '준비 중인 기능입니다.' })
-  }
 
   return (
     <Paper>
@@ -58,11 +55,7 @@ export const TreeViewer: FC<TreeViewerProps> = ({ className }) => {
               </StyledFont>
             </Row>
           </Row>
-          <Paper bgColor={'temp.#2d396855'} radius={30}>
-            <Row p={10} cursor={'pointer'} onClick={onClickShareButton}>
-              <Image src={mailIconImg} width={24} height={24} alt={'edit icon image'} background={false} />
-            </Row>
-          </Paper>
+          <ChristmasLetterModal name={name} content={content} />
         </Row>
         <Column>
           <Position position={'relative'}>
@@ -127,10 +120,6 @@ const HighlightFontWrapper = styled.span`
 const StyledPaper = styled(Paper)`
   background: transparent;
 `
-
-type StyledSwitchProps = {
-  checked: boolean
-}
 
 const StyledFont = styled(Font)`
   font-family: 'KingSejongInstitute';
