@@ -3,13 +3,12 @@ import { Container } from '@components/common/Container'
 import { Font } from '@components/common/Font'
 import { Image } from '@components/common/Image'
 import { IntroduceModal } from '@components/common/IntroduceModal'
+import { LoginModal } from '@components/common/LoginModal'
 import { Paper } from '@components/common/Paper'
 import { Position } from '@components/common/Position'
 import { Row } from '@components/common/Row'
 import { Space } from '@components/common/Space'
 import styled from '@emotion/styled'
-import { useLocalStorage } from '@hooks/useLocalStorage'
-import { useRouter } from 'next/router'
 import mainDecoration1Img from 'public/images/main_decoration_1.png'
 import mainDecoration2Img from 'public/images/main_decoration_2.png'
 import mainDecoration3Img from 'public/images/main_decoration_3.png'
@@ -24,20 +23,6 @@ const MAIN_LAYOUT_PAGE_MAX_WIDTH = '100%'
 const MAIN_LAYOUT_PAGE_MIN_WIDTH = 320
 
 export const MainPage: FC<MainPageProps> = ({ className }) => {
-  const { push } = useRouter()
-  const { setItem: setTestLoginItem } = useLocalStorage('test_login')
-
-  const onClickTestLoginButton = () => {
-    setTestLoginItem(2)
-    push('/tree/details/1')
-    return
-  }
-
-  const _onClickSubmitButton = () => {
-    push('/user/join')
-    return
-  }
-
   return (
     <Column className={className}>
       <Container size={'sm'}>
@@ -88,21 +73,7 @@ export const MainPage: FC<MainPageProps> = ({ className }) => {
                 <Position position={'absolute'} top={635}>
                   <StyledColumn width={'100%'} gap={20}>
                     <IntroduceModal />
-                    <Paper bgColor={'temp.#588C7E'} radius={12}>
-                      <Row
-                        px={16}
-                        py={10}
-                        height={45}
-                        justify={'center'}
-                        align={'center'}
-                        cursor={'pointer'}
-                        onClick={onClickTestLoginButton}
-                      >
-                        <StyledTitleFont type={'btn-16-medium'} color={'white'}>
-                          로그인
-                        </StyledTitleFont>
-                      </Row>
-                    </Paper>
+                    <LoginModal />
                   </StyledColumn>
                 </Position>
               </Column>
