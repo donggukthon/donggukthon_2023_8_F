@@ -31,7 +31,7 @@ export const TreeDetailsPage: FC<TreeDetailsPageProps> = ({ className }) => {
 
   return (
     <Position position={'relative'}>
-      <Column className={className}>
+      <Column className={className} maxWidth={'100vw'}>
         <StyledPosition position={'absolute'} top={250} style={{ zIndex: 0 }}>
           <StyledImageWrapper>
             <StyledImage
