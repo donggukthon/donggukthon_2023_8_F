@@ -6,8 +6,6 @@ type MainTreeCanvasProps = {
   className?: string
 }
 
-const DEFAULT_POSITION = [0, 0.2, -0.4]
-
 // 4: 팔찌, 5: 지팡이, 6: 종, 7: 선물상자, 8: 별
 
 const DEFAULT_DATA = [

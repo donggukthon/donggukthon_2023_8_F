@@ -12,7 +12,6 @@ import drawerMenu3Img from 'public/images/drawer_menu_3.png'
 import drawerMenu4Img from 'public/images/drawer_menu_4.png'
 import drawerMenu5Img from 'public/images/drawer_menu_5.png'
 import drawerMenu6Img from 'public/images/drawer_menu_6.png'
-import homeIconImg from 'public/images/home_icon.png'
 import menuIconImg from 'public/images/menu_icon.png'
 import { FC } from 'react'
 import { Drawer } from '../Drawer'
@@ -87,7 +86,7 @@ export const Header: FC<HeaderProps> = ({ className, title = '나만의 3D 트�
 
   return (
     <Position position={'fixed'} top={0} left={0}>
-      <StyledPaper width={'100%'} bgColor={isTreePage ? 'temp.#475482' : 'temp.#9B7356'}>
+      <StyledPaper width={'100%'} bgColor={isTreePage ? 'temp.#2a396b' : 'temp.#9B7356'}>
         <Column className={className} width={'100%'} height={HEADER_HEIGHT} align={'center'}>
           <Row
             maxWidth={CONTAINER_MAX_WIDTH}
@@ -98,7 +97,7 @@ export const Header: FC<HeaderProps> = ({ className, title = '나만의 3D 트�
             px={20}
           >
             <Row onClick={onClickHomeButton} cursor={'pointer'}>
-              <Image src={homeIconImg} alt={'home icon image'} width={24} height={24} background={false} />
+              {/* <Image src={homeIconImg} alt={'home icon image'} width={24} height={24} background={false} /> */}
             </Row>
             <Row>
               <Font type={'btn-16-medium'} color={'white'}>

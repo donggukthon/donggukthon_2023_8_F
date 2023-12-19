@@ -19,7 +19,7 @@ export const getTreeDetailsPageUrl = (params: TreeDetailsPageProps) =>
 
 const TreeDetailsPage: NextPage<TreeDetailsPageProps> = () => (
   <Position position={'relative'}>
-    <Paper bgColor={'temp.#596592'}>
+    <Paper bgColor={'temp.#2d3968'}>
       <Column maxWidth={[MOBILE_ROOT_MAX_WIDTH, '100%']} minHeight={'100vh'} pb={FOOTER_HEIGHT} mx={'auto'}>
         <MetaTags />
         <Header isTreePage={true} title={'나만의 3D 트리'} />
