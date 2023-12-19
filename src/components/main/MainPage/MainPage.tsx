@@ -13,15 +13,15 @@ import googleIconImage from 'public/images/google_icon.png'
 import mainDecoration1Img from 'public/images/main_decoration_1.png'
 import mainDecoration2Img from 'public/images/main_decoration_2.png'
 import mainDecoration3Img from 'public/images/main_decoration_3.png'
-import mainDecoration4Img from 'public/images/main_decoration_4.png'
 import mainTitleTypoImg from 'public/images/main_title_typo.png'
 import { FC } from 'react'
+import { MainTreeCanvas } from '../MainTreeCanvas'
 
 type MainPageProps = {
   className?: string
 }
 
-const MAIN_LAYOUT_PAGE_MAX_WIDTH = 375
+const MAIN_LAYOUT_PAGE_MAX_WIDTH = '100%'
 const MAIN_LAYOUT_PAGE_MIN_WIDTH = 320
 
 export const MainPage: FC<MainPageProps> = ({ className }) => {
@@ -65,8 +65,8 @@ export const MainPage: FC<MainPageProps> = ({ className }) => {
                     background={false}
                   />
                 </Position>
-                <Position position={'absolute'} top={26} left={140}>
-                  <Image
+                <Position position={'absolute'}>
+                  <StyledWreathImage
                     src={mainDecoration3Img}
                     alt={'main decoration 3 image'}
                     width={100}
@@ -74,7 +74,7 @@ export const MainPage: FC<MainPageProps> = ({ className }) => {
                     background={false}
                   />
                 </Position>
-                <Position position={'absolute'} top={165}>
+                <Position position={'absolute'} top={150}>
                   <StyledCenterColumn gap={15} align={'center'} p={10}>
                     <Image
                       src={mainTitleTypoImg}
@@ -83,19 +83,12 @@ export const MainPage: FC<MainPageProps> = ({ className }) => {
                       height={32}
                       background={false}
                     />
-                    <Font type={'heading-14-regular'} color={'gray.850'}>
-                      🎄❄️ 3D 트리와 함께 따뜻한 마음을 나눠요! 🎄❄️
-                    </Font>
                   </StyledCenterColumn>
                 </Position>
-                <Position position={'absolute'} top={215} left={0}>
-                  <Image
-                    src={mainDecoration4Img}
-                    alt={'main decoration 4 image'}
-                    width={343}
-                    height={395}
-                    background={false}
-                  />
+                <Position position={'absolute'} top={0} left={0}>
+                  <Column width={'100%'}>
+                    <MainTreeCanvas />
+                  </Column>
                 </Position>
                 <Position position={'absolute'} top={635}>
                   <StyledCenterPaper bgColor={'white'} radius={12}>
@@ -156,6 +149,12 @@ const StyledCenterColumn = styled(Column)`
 const StyledCenterPaper = styled(Paper)`
   width: calc(100% - 40px);
   top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`
+
+const StyledWreathImage = styled(Image)`
+  top: 60px;
   left: 50%;
   transform: translate(-50%, -50%);
 `

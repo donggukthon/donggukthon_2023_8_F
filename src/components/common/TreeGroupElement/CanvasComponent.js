@@ -8,7 +8,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 
-const Snow = ({ radius, centerPosition, rangeRadius, isSnowing }) => {
+const Snow = ({ radius, centerPosition, rangeRadius, isSnowing, model }) => {
   const snowRef = useRef(null)
   const position = new THREE.Vector3(
     centerPosition.x - rangeRadius + Math.random() * rangeRadius * 2,
@@ -16,7 +16,7 @@ const Snow = ({ radius, centerPosition, rangeRadius, isSnowing }) => {
     centerPosition.z - rangeRadius + Math.random() * rangeRadius * 2
   )
 
-  const snow = useGLTF(`/models/snow_flake_1.glb`).scene.clone()
+  const snow = useGLTF(`/models/snow_flake_${model + 1}.glb`).scene.clone()
 
   snow.position.set(position.x, position.y, position.z)
   snow.scale.set(radius, radius, radius)
@@ -109,7 +109,7 @@ const GroupModel = ({ autoRotate, decorationList, index, order, incrementValue }
 
   useFrame(() => {
     if (ref.current && autoRotate) {
-      ref.current.rotation.y += 0.008
+      ref.current.rotation.y += 0.006
     }
   })
   useEffect(() => {
@@ -155,14 +155,6 @@ const GroupModel = ({ autoRotate, decorationList, index, order, incrementValue }
   )
 }
 
-function FixedZCamera() {
-  useFrame(({ camera }) => {
-    camera.position.y = 5
-  })
-
-  return null
-}
-
 const CanvasComponent = ({
   cameraPosition = [0, 0, 5],
   cameraFov = 20,
@@ -170,6 +162,7 @@ const CanvasComponent = ({
   testTreeList = [],
   order = 2,
   incrementValue = 0,
+  width,
   height = 500,
   isSnowing = false,
 }) => {
@@ -186,8 +179,8 @@ const CanvasComponent = ({
       isSnowing={isSnowing}
       centerPosition={glassPosition}
       rangeRadius={glassRadius}
-      radius={0.05 + Math.random() * 0.1}
-      model={Math.floor(Math.random() * 3)}
+      radius={0.03 + Math.random() * 0.05}
+      model={Math.floor(Math.random() * 2)}
     />
   ))
 
@@ -201,7 +194,7 @@ const CanvasComponent = ({
 
   return (
     <>
-      <StyledCanvas camera={{ fov: cameraFov, position: cameraPosition }} height={height} ref={cameraRef}>
+      <StyledCanvas camera={{ fov: cameraFov, position: cameraPosition }} width={width} height={height} ref={cameraRef}>
         <ambientLight intensity={1} color={'#cfcabb'} />
         <directionalLight position={[5, 7, 3]} intensity={2} color={'#f1e0c8'} castShadow />
         <directionalLight position={[5, 7, -3]} intensity={2} color={'#f1e0c8'} castShadow />
@@ -219,8 +212,8 @@ const CanvasComponent = ({
         ))}
         <OrbitControls
           ref={orbitRef}
-          enablePan={true}
-          enableZoom={true}
+          enablePan={false}
+          enableZoom={false}
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 4}
           target={[0, 0, 0]}
