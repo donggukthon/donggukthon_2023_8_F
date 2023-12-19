@@ -9,7 +9,6 @@ import { Space } from '@components/common/Space'
 import styled from '@emotion/styled'
 import { useLocalStorage } from '@hooks/useLocalStorage'
 import { useRouter } from 'next/router'
-import googleIconImage from 'public/images/google_icon.png'
 import mainDecoration1Img from 'public/images/main_decoration_1.png'
 import mainDecoration2Img from 'public/images/main_decoration_2.png'
 import mainDecoration3Img from 'public/images/main_decoration_3.png'
@@ -33,7 +32,7 @@ export const MainPage: FC<MainPageProps> = ({ className }) => {
     return
   }
 
-  const onClickSubmitButton = () => {
+  const _onClickSubmitButton = () => {
     push('/user/join')
     return
   }
@@ -86,40 +85,38 @@ export const MainPage: FC<MainPageProps> = ({ className }) => {
                   </Column>
                 </Position>
                 <Position position={'absolute'} top={635}>
-                  <StyledCenterPaper bgColor={'white'} radius={12}>
-                    <Row
-                      px={16}
-                      py={10}
-                      height={45}
-                      justify={'center'}
-                      align={'center'}
-                      cursor={'pointer'}
-                      onClick={onClickTestLoginButton}
-                    >
-                      <Font type={'btn-16-medium'} color={'gray.800'}>
-                        테스트 로그인 하기
-                      </Font>
-                    </Row>
-                  </StyledCenterPaper>
-                </Position>
-                <Position position={'absolute'} top={695}>
-                  <StyledCenterPaper bgColor={'white'} radius={12}>
-                    <Row
-                      px={16}
-                      py={10}
-                      height={45}
-                      justify={'between'}
-                      align={'center'}
-                      cursor={'pointer'}
-                      onClick={onClickSubmitButton}
-                    >
-                      <Image alt={'google icon'} src={googleIconImage} width={25} height={25} />
-                      <Font type={'btn-16-medium'} color={'gray.800'}>
-                        구글로 시작하기
-                      </Font>
-                      <Space width={25} height={25} />
-                    </Row>
-                  </StyledCenterPaper>
+                  <StyledColumn width={'100%'} gap={20}>
+                    <Paper bgColor={'temp.#BC5952'} radius={12}>
+                      <Row
+                        px={16}
+                        py={10}
+                        height={45}
+                        justify={'center'}
+                        align={'center'}
+                        cursor={'pointer'}
+                        onClick={onClickTestLoginButton}
+                      >
+                        <StyledTitleFont type={'btn-16-medium'} color={'white'}>
+                          소개페이지
+                        </StyledTitleFont>
+                      </Row>
+                    </Paper>
+                    <Paper bgColor={'temp.#588C7E'} radius={12}>
+                      <Row
+                        px={16}
+                        py={10}
+                        height={45}
+                        justify={'center'}
+                        align={'center'}
+                        cursor={'pointer'}
+                        onClick={onClickTestLoginButton}
+                      >
+                        <StyledTitleFont type={'btn-16-medium'} color={'white'}>
+                          로그인
+                        </StyledTitleFont>
+                      </Row>
+                    </Paper>
+                  </StyledColumn>
                 </Position>
               </Column>
             </Position>
@@ -141,9 +138,8 @@ const StyledCenterColumn = styled(Column)`
   transform: translate(-50%, -50%);
 `
 
-const StyledCenterPaper = styled(Paper)`
+const StyledColumn = styled(Column)`
   width: calc(100% - 40px);
-  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 `

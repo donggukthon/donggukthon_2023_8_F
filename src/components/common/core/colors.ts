@@ -73,6 +73,8 @@ export const baseColors = {
     '#17FFFF': '#17FFFF',
     '#5073B5': '#5073B5',
     '#AA9788': '#AA9788',
+    '#BC5952': '#BC5952',
+    '#588C7E': '#588C7E',
   },
 }
 

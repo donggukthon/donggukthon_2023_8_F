@@ -1,7 +1,6 @@
 import { Paper } from '@components/common/Paper'
 import { Space } from '@components/common/Space'
 import { MainPage as MainPageComponent } from '@components/main/MainPage'
-import { FOOTER_HEIGHT } from '@constants/layout'
 import { BreadcrumbListSnippet, BREADCRUMBS, MetaTags } from '@libs/seo'
 import { OrganizationSnippet } from '@libs/seo/OrganizationSnippet'
 import { getUrl } from '@utils/getUrl'
@@ -22,7 +21,7 @@ const MainPage: NextPage<MainPageProps> = () => {
       <MetaTags title="나만의 3D 트리" description="3D 트리를 꾸미면서 기부를 해보세요!" />
       <Paper bgColor={'temp.#DACDC3'}>
         <MainPageComponent />
-        <Space height={FOOTER_HEIGHT} />
+        <Space height={20} />
       </Paper>
     </>
   )

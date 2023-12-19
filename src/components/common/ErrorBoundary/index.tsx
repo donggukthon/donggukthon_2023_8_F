@@ -4,6 +4,7 @@ import fallbackThumbnailImg from 'public/images/fallback_thumbnail.png'
 import React, { ErrorInfo, ReactNode } from 'react'
 import { Image } from '../Image'
 import { Paper } from '../Paper'
+import { Position } from '../Position'
 import { Row } from '../Row'
 
 interface ErrorBoundaryProps {
@@ -34,17 +35,19 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
   render() {
     if (this.state.hasError) {
       return (
-        <Paper bgColor={'temp.#AA9788'}>
-          <Row overflow={'hidden'} p={20}>
-            <StyledImage
-              src={fallbackThumbnailImg}
-              alt={'fallback thumbnail image'}
-              width={400}
-              height={400}
-              background={false}
-            />
-          </Row>
-        </Paper>
+        <StyledPosition position={'fixed'} top={0} left={0}>
+          <Paper bgColor={'temp.#AA9788'}>
+            <Row width={'100vw'} height={'100vh'} overflow={'hidden'} p={20} justify={'center'} align={'center'}>
+              <StyledImage
+                src={fallbackThumbnailImg}
+                alt={'fallback thumbnail image'}
+                width={400}
+                height={400}
+                background={false}
+              />
+            </Row>
+          </Paper>
+        </StyledPosition>
       )
     }
 
@@ -60,6 +63,11 @@ const StyledImage = styled(Image)`
     height: 400px;
     object-fit: contain;
     border-radius: 12px;
+    margin-top: -50px;
     z-index: 5;
   }
+`
+
+const StyledPosition = styled(Position)`
+  z-index: 999;
 `
