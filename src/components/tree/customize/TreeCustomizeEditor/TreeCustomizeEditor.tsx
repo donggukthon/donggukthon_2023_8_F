@@ -312,7 +312,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
   }, [selectedDecorationIndex])
 
   return (
-    <StyledPaper>
+    <StyledPaper bgColor={'temp.#CEBAAC'}>
       <Column className={className}>
         <Column overflow={'hidden'} height={400}>
           <ThreeElement testTreeList={testTreeList} height={400} cameraPosition={[0, 0, 4]} autoRotate={autoRotate} />
@@ -322,7 +322,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
         </Column>
         <Column width={'100%'} p={20}>
           <Border radius={12} thickness={1} color={'gray.300'}>
-            <Paper bgColor={'white'}>
+            <Paper bgColor={'temp.#FFFDFD85'}>
               <Column width={'100%'} p={20}>
                 <Row gap={20} align={'center'} height={32}>
                   <Row width={30}>
@@ -382,7 +382,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
                   </Row>
                   <Row gap={10} align={'center'}>
                     {selectedDecorationIndex === 0 ? (
-                      <Paper radius={60} borderColor={'gray.200'}>
+                      <Paper radius={60} borderColor={'gray.200'} bgColor={'white'}>
                         <Row
                           width={DECORATION_BUTTON_WIDTH}
                           height={DECORATION_BUTTON_WIDTH}
@@ -403,7 +403,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
                       </Paper>
                     ) : (
                       <Row gap={10} align={'center'} wrap={'wrap'}>
-                        <Paper radius={60} borderColor={'gray.200'}>
+                        <Paper radius={60} borderColor={'gray.200'} bgColor={'white'}>
                           <Row
                             width={DECORATION_BUTTON_WIDTH}
                             height={DECORATION_BUTTON_WIDTH}
@@ -441,7 +441,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
                             />
                           </Row>
                         </Paper> */}
-                        <Paper radius={60} borderColor={'gray.200'}>
+                        <Paper radius={60} borderColor={'gray.200'} bgColor={'white'}>
                           <Row
                             width={DECORATION_BUTTON_WIDTH}
                             height={DECORATION_BUTTON_WIDTH}
@@ -460,7 +460,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
                             />
                           </Row>
                         </Paper>
-                        <Paper radius={60} borderColor={'gray.200'}>
+                        <Paper radius={60} borderColor={'gray.200'} bgColor={'white'}>
                           <Row
                             width={DECORATION_BUTTON_WIDTH}
                             height={DECORATION_BUTTON_WIDTH}
@@ -479,7 +479,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
                             />
                           </Row>
                         </Paper>
-                        <Paper radius={60} borderColor={'gray.200'}>
+                        <Paper radius={60} borderColor={'gray.200'} bgColor={'white'}>
                           <Row
                             width={DECORATION_BUTTON_WIDTH}
                             height={DECORATION_BUTTON_WIDTH}
@@ -515,6 +515,7 @@ export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({ className })
                       radius={8}
                       borderColor={'gray.300'}
                       overflow={'hidden'}
+                      bgColor={'white'}
                     >
                       <Row cursor={'pointer'} onClick={onClickKind(selectedDecorationIndex, value.url)}>
                         <PreviewImage
@@ -618,5 +619,5 @@ const PreviewImage = styled(Image)`
 `
 
 const StyledPaper = styled(Paper)`
-  background: linear-gradient(180deg, #dacdc3 0%, rgba(218, 205, 195, 0) 100%);
+  /* background: linear-gradient(180deg, #dacdc3 0%, rgba(218, 205, 195, 0) 100%); */
 `

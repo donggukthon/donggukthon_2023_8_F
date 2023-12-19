@@ -6,11 +6,8 @@ import { useBooleanState } from '@hooks/useBooleanState'
 import { useLocalStorage } from '@hooks/useLocalStorage'
 import { useRouter } from 'next/router'
 import closeIconImg from 'public/images/close_icon.png'
-import drawerMenu1Img from 'public/images/drawer_menu_1.png'
 import drawerMenu2Img from 'public/images/drawer_menu_2.png'
 import drawerMenu3Img from 'public/images/drawer_menu_3.png'
-import drawerMenu4Img from 'public/images/drawer_menu_4.png'
-import drawerMenu5Img from 'public/images/drawer_menu_5.png'
 import drawerMenu6Img from 'public/images/drawer_menu_6.png'
 import menuIconImg from 'public/images/menu_icon.png'
 import { FC } from 'react'
@@ -31,11 +28,11 @@ type HeaderProps = {
 }
 
 const MENU_ITEM = [
-  {
-    icon: drawerMenu1Img,
-    label: '서비스 소개',
-    link: '/introduce',
-  },
+  // {
+  //   icon: drawerMenu1Img,
+  //   label: '서비스 소개',
+  //   link: '/introduce',
+  // },
   {
     icon: drawerMenu2Img,
     label: '나만의 트리',
@@ -46,16 +43,16 @@ const MENU_ITEM = [
     label: '기부하기',
     link: '/tree/details/1',
   },
-  {
-    icon: drawerMenu4Img,
-    label: '명예의 전당',
-    link: '',
-  },
-  {
-    icon: drawerMenu5Img,
-    label: '마이페이지',
-    link: '/mypage',
-  },
+  // {
+  //   icon: drawerMenu4Img,
+  //   label: '명예의 전당',
+  //   link: '',
+  // },
+  // {
+  //   icon: drawerMenu5Img,
+  //   label: '마이페이지',
+  //   link: '/mypage',
+  // },
 ]
 
 export const Header: FC<HeaderProps> = ({ className, title = '나만의 3D 트리', isTreePage = false }) => {
@@ -100,9 +97,9 @@ export const Header: FC<HeaderProps> = ({ className, title = '나만의 3D 트�
               {/* <Image src={homeIconImg} alt={'home icon image'} width={24} height={24} background={false} /> */}
             </Row>
             <Row>
-              <Font type={'btn-16-medium'} color={'white'}>
+              <StyledFont type={['btn-14-medium', 'btn-16-medium']} color={'white'}>
                 {title}
-              </Font>
+              </StyledFont>
             </Row>
             <Row cursor={'pointer'}>
               <Drawer
@@ -181,4 +178,8 @@ export const Header: FC<HeaderProps> = ({ className, title = '나만의 3D 트�
 
 const StyledPaper = styled(Paper)`
   z-index: 999;
+`
+
+const StyledFont = styled(Font)`
+  font-family: 'KingSejongInstitute';
 `

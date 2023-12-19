@@ -81,6 +81,7 @@ export const baseColors = {
     '#2a396b55': '#2a396b88',
     '#2d3968': '#2d3968',
     '#2d396855': '#2d396888',
+    '#CEBAAC': '#CEBAAC',
   },
 }
 

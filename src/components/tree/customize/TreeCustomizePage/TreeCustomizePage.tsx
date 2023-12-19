@@ -24,7 +24,7 @@ export const TreeCustomizePage: FC<TreeCustomizePageProps> = ({ className }) => 
 
   return (
     <Container size={'sm'}>
-      <Paper bgColor={'white'}>
+      <Paper>
         <Column className={className} minHeight={'100vh'} pb={40}>
           <TreeCustomizeEditor />
           <Row mt={20} width={'100%'} justify={'end'} gap={10} pr={20}>
