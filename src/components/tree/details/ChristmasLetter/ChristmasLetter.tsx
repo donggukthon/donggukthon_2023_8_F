@@ -26,15 +26,15 @@ export const ChristmasLetter: FC<ChristmasLetterProps> = ({ className, name, con
             background={false}
           />
           <Position position={'absolute'} top={28} left={35}>
-            <Font type={'heading-20-medium'} color={'gray.800'}>
+            <StyledFont type={'heading-20-medium'} color={'gray.800'}>
               {name} 님
-            </Font>
+            </StyledFont>
           </Position>
           <Position position={'absolute'} top={70} left={30}>
             <Row width={240} height={100}>
-              <Font type={'heading-16-medium'} color={'gray.800'}>
+              <StyledFont type={'heading-16-medium'} color={'gray.800'}>
                 {content}
-              </Font>
+              </StyledFont>
             </Row>
           </Position>
         </Column>
@@ -47,4 +47,8 @@ const StyledImage = styled(Image)`
   img {
     height: auto;
   }
+`
+
+const StyledFont = styled(Font)`
+  font-family: 'KingSejongInstitute';
 `
