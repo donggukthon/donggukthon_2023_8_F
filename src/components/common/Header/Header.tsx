@@ -41,7 +41,7 @@ const MENU_ITEM = [
   {
     icon: drawerMenu3Img,
     label: '기부하기',
-    link: '/tree/details/1',
+    link: '/donate',
   },
   // {
   //   icon: drawerMenu4Img,
