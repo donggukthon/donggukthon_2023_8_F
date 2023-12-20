@@ -42,6 +42,7 @@ export const LoginModal: FC<LoginModalProps> = ({ className }) => {
 
   const onClickLoginButton = () => {
     userLoginMutate({ email, password })
+    push('/tree/details/1')
     return
   }
 
