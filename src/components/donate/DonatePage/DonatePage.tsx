@@ -80,7 +80,7 @@ export const DonatePage: FC<DonatePageProps> = ({ className }) => {
                 </a>
                 <Space height={10} />
                 <StyledFont type={['btn-12-regular', 'btn-14-regular']} color={'gray.800'} wordBreak={'keep-all'}>
-                  {`이벤트에 참여하여 모두가 행복한 특별한 하루를 만들어보세요. 아래 계좌번호로 여러분의 따뜻한 마음을 어려운 이웃에게 나눠주세요😀`}
+                  {`이벤트에 참여하여 모두가 행복한 특별한 하루를 만들어보세요. 아래 계좌번호로 여러분의 따뜻한 마음을 어려운 이웃에게 나눠주세요😀 기부금 기준 금액은 2,000원 입니다.`}
                 </StyledFont>
                 <Space height={10} />
                 <StyledFont type={['btn-12-regular', 'btn-14-regular']} color={'gray.800'} wordBreak={'keep-all'}>
