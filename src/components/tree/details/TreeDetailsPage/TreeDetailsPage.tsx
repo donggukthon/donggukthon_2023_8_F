@@ -92,7 +92,7 @@ export const TreeDetailsPage: FC<TreeDetailsPageProps> = ({ className }) => {
               <StyledColumn
                 width={'100%'}
                 justify={'center'}
-                mt={40}
+                mt={50}
                 p={10}
                 cursor={'pointer'}
                 onClick={onClickDonateButton}
@@ -108,7 +108,7 @@ export const TreeDetailsPage: FC<TreeDetailsPageProps> = ({ className }) => {
                 />
                 <Row width={'100%'} justify={'center'}>
                   <StyledFont type={['body-10-regular', 'btn-12-regular']} color={'gray.700'}>
-                    {`기부금은 전액 "사회연대은행"에 기부됩니다.`}
+                    {`서비스 수익금은 금융문제로 어려움을 겪는 이들을 돕는 "사회연대은행"에 기부합니다`}
                   </StyledFont>
                 </Row>
               </StyledColumn>
