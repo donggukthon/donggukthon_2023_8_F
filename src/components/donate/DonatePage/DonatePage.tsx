@@ -73,9 +73,11 @@ export const DonatePage: FC<DonatePageProps> = ({ className }) => {
               </Column>
               <Space height={30} />
               <Column width={320}>
-                <StyledFont type={['btn-12-regular', 'btn-14-regular']} color={'gray.800'} wordBreak={'keep-all'}>
-                  {`올해 나만의 3D 트리 수익금은 금융문제로 어려움을 겪는 이들을 돕는 "사회연대은행"에 후원합니다. `}
-                </StyledFont>
+                <a href={'https://www.bss.or.kr/campaign/goodday23.html'} target={'_blank'} rel="noreferrer">
+                  <StyledFont type={['btn-12-regular', 'btn-14-regular']} color={'gray.800'} wordBreak={'keep-all'}>
+                    {`올해 나만의 3D 트리 수익금은 금융문제로 어려움을 겪는 이들을 돕는 "사회연대은행"에 후원합니다. `}
+                  </StyledFont>
+                </a>
                 <Space height={10} />
                 <StyledFont type={['btn-12-regular', 'btn-14-regular']} color={'gray.800'} wordBreak={'keep-all'}>
                   {`이벤트에 참여하여 모두가 행복한 특별한 하루를 만들어보세요. 아래 계좌번호로 여러분의 따뜻한 마음을 어려운 이웃에게 나눠주세요😀`}
