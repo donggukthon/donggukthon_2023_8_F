@@ -21,7 +21,7 @@ const TreeCustomizePage: NextPage<TreeCustomizePageProps> = () => (
   <Position position={'relative'}>
     <Paper bgColor={'temp.#CEBAAC'}>
       <Column maxWidth={[MOBILE_ROOT_MAX_WIDTH, '100%']} minHeight={`100vh`} mx={'auto'}>
-        <MetaTags />
+        <MetaTags title={'트리 꾸미기 - 나만의 3D 트리'} description="겨울철 소중한 경험에 함께 참여해주세요!" />
         <Header title={'트리 꾸미기'} />
         <Space height={HEADER_HEIGHT} />
         <TreeCustomizePageComponent />

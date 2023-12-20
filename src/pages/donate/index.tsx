@@ -20,7 +20,7 @@ const DonatePage: NextPage<DonatePageProps> = () => (
   <Position position={'relative'}>
     <Paper bgColor={'temp.#DACDC3'}>
       <Column maxWidth={[MOBILE_ROOT_MAX_WIDTH, '100%']} minHeight={`100vh`} pb={FOOTER_HEIGHT} mx={'auto'}>
-        <MetaTags />
+        <MetaTags title={'후원하기 - 나만의 3D 트리'} description="겨울철 소중한 경험에 함께 참여해주세요!" />
         <Header title={'후원하기'} />
         <Space height={HEADER_HEIGHT} />
         <DonatePageComponent />
