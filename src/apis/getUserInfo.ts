@@ -11,7 +11,7 @@ export type GetUserInfoResponseType = {
   data: MemberItemType
 } & StatusType
 
-const getUserInfoQueryPath = (_param: GetUserInfoRequestType) => `/user/info.php`
+const getUserInfoQueryPath = (_param: GetUserInfoRequestType) => `/member/info`
 
 const getUserInfo = (params: GetUserInfoRequestType, config?: AxiosRequestConfig) => {
   return axiosGET<GetUserInfoRequestType, GetUserInfoResponseType>(getUserInfoQueryPath(params), params, config)

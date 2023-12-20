@@ -12,7 +12,7 @@ export type CommonModelType = IdType & CreatedAtType
 
 export type MemberItemType = {
   email: string
-  password: string
+  password?: string
   name?: string
   nickname?: string
   gender?: GenderType

@@ -9,12 +9,10 @@ export type PostUserLoginRequestType = {
 }
 
 export type PostUserLoginResponseType = {
-  data: {
-    token: string
-  }
+  data: string
 } & StatusType
 
-const postUserLoginMutationPath = (_param: PostUserLoginRequestType) => `/user/login.php`
+const postUserLoginMutationPath = (_param: PostUserLoginRequestType) => `/member/login`
 
 const postUserLogin = (params: PostUserLoginRequestType, config?: AxiosRequestConfig) => {
   return axiosPOST<PostUserLoginRequestType, PostUserLoginResponseType>(

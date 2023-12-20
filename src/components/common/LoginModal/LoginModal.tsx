@@ -1,3 +1,4 @@
+import { usePostUserLoginMutation } from '@apis/postUserLogin'
 import { Column } from '@components/common/Column'
 import styled from '@emotion/styled'
 import { useBooleanState } from '@hooks/useBooleanState'
@@ -10,6 +11,7 @@ import { Modal } from '../Modal'
 import { Paper } from '../Paper'
 import { Row } from '../Row'
 import { Space } from '../Space'
+import { useToast } from '../Toast'
 
 type LoginModalProps = {
   className?: string
@@ -19,21 +21,40 @@ export const LoginModal: FC<LoginModalProps> = ({ className }) => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const { push } = useRouter()
-
-  const { setItem: setItemTestLogin } = useLocalStorage('test-login')
+  const { showFailToast } = useToast()
+  const { setItem: setItemTestToken } = useLocalStorage('token')
+  const { mutate: userLoginMutate } = usePostUserLoginMutation({
+    onSuccess: (e) => {
+      if (e.status === 'SUCCESS') {
+        setItemTestToken(e.data)
+        closeModal()
+      }
+      if (e.status === 'FAILED') {
+        showFailToast({ message: '로그인에 실패했습니다.' })
+      }
+    },
+    onError: () => {
+      showFailToast({ message: '로그인에 실패했습니다.' })
+    },
+  })
 
   const { state: isOpened, setFalse: closeModal, setTrue: openModal } = useBooleanState(false)
 
   const onClickLoginButton = () => {
-    setItemTestLogin(email)
-    closeModal()
-    push(`/tree/details/${email}`)
+    userLoginMutate({ email, password })
     return
   }
 
   const onClickJoinButton = () => {
     push(`/user/join`)
     return
+  }
+
+  const onKeyPressEnter = (e: any) => {
+    if (e.key === 'Enter') {
+      onClickLoginButton()
+      return
+    }
   }
 
   return (
@@ -53,12 +74,14 @@ export const LoginModal: FC<LoginModalProps> = ({ className }) => {
               placeholder="이메일을 입력해주세요."
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={onKeyPressEnter}
             />
             <StyledTextInput
               placeholder="비밀번호를 입력해주세요."
               type={'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={onKeyPressEnter}
             />
           </Column>
           <Space height={20} />
@@ -98,7 +121,7 @@ export const LoginModal: FC<LoginModalProps> = ({ className }) => {
       renderOpener={() => (
         <Paper bgColor={'temp.#588C7E'} radius={12}>
           <Row px={16} py={10} height={45} justify={'center'} align={'center'} cursor={'pointer'} onClick={openModal}>
-            <StyledTitleFont type={'btn-16-medium'} color={'white'}>
+            <StyledTitleFont type={['btn-14-medium', 'btn-16-medium']} color={'white'}>
               로그인
             </StyledTitleFont>
           </Row>

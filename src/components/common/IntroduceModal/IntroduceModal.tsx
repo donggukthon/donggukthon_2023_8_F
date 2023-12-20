@@ -67,7 +67,7 @@ export const IntroduceModal: FC<IntroduceModalProps> = ({ className }) => {
             cursor={'pointer'}
             onClick={openIntroduceModal}
           >
-            <StyledTitleFont type={'btn-16-medium'} color={'white'}>
+            <StyledTitleFont type={['btn-14-medium', 'btn-16-medium']} color={'white'}>
               소개페이지
             </StyledTitleFont>
           </Row>

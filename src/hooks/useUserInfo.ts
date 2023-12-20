@@ -19,7 +19,14 @@ export const useUserInfo = (): useUserInfoType => {
 
   const userInfoData = data?.data
 
-  const userInfo = status === 'success' ? userInfoData : undefined
+  const _userInfo = status === 'success' ? userInfoData : undefined
 
-  return { userInfo, isLoadingGetUserInfo, isFetchedGetUserInfo, refetchGetUserInfo }
+  const testInfo = {
+    id: 2,
+    name: '아마추어개발자',
+    email: 'ghkdwogud852@gmail.com',
+    createdAt: '2023-12-20T02:05:37',
+  }
+
+  return { userInfo: testInfo, isLoadingGetUserInfo, isFetchedGetUserInfo, refetchGetUserInfo }
 }
