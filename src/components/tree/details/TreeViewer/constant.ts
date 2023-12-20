@@ -17,7 +17,7 @@ const Cal3 = (t: number) => {
 
 export const TREE_VIEWER_TEST_DATA = [
   {
-    name: '베타테스터1',
+    name: '유수민',
     decorationList: [
       {
         decorationType: 'TREE',
@@ -70,7 +70,7 @@ export const TREE_VIEWER_TEST_DATA = [
     ],
   },
   {
-    name: '베타테스터2',
+    name: '이민지',
     decorationList: [
       {
         decorationType: 'TREE',
@@ -133,11 +133,74 @@ export const TREE_VIEWER_TEST_DATA = [
     ],
   },
   {
-    name: '베타테스터3',
+    name: '황재형',
     decorationList: [
       {
         decorationType: 'TREE',
         url: '/models/tree_2.glb',
+        position: [0, 0.3, 0],
+        scale: [0.3, 0.3, 0.3],
+        rotate: [0, 0, 0],
+        type: 'GLB',
+      },
+      {
+        decorationType: 'DECORATION_7',
+        url: '/models/decoration_7_3.glb',
+        position: Cal3(70),
+        floor: 3,
+        degree: 70 * 3.6,
+        scale: [0.3, 0.3, 0.3],
+        rotate: [0.2, 0.3, 0.4],
+        type: 'GLB',
+      },
+      {
+        decorationType: 'DECORATION_8',
+        url: '/models/decoration_8_1.glb',
+        position: Cal3(20),
+        floor: 3,
+        degree: 20 * 3.6,
+        scale: [0.4, 0.4, 0.4],
+        rotate: [-0.1, 0.3, 0.4],
+        type: 'GLB',
+      },
+      {
+        decorationType: 'DECORATION_5',
+        url: '/models/decoration_7_1.glb',
+        position: Cal2(40),
+        floor: 2,
+        degree: 40 * 3.6,
+        scale: [0.3, 0.3, 0.3],
+        rotate: [0.2, 0.3, 0.4],
+        type: 'GLB',
+      },
+      {
+        decorationType: 'DECORATION_5',
+        url: '/models/decoration_5_1.glb',
+        position: Cal2(65),
+        floor: 2,
+        degree: 65 * 3.6,
+        scale: [0.25, 0.25, 0.25],
+        rotate: [-0.1, 0.3, 0.4],
+        type: 'GLB',
+      },
+      {
+        decorationType: 'DECORATION_5',
+        url: '/models/decoration_5_3.glb',
+        position: Cal1(95),
+        floor: 1,
+        degree: 95 * 3.6,
+        scale: [0.15, 0.15, 0.15],
+        rotate: [0.2, 0.3, 0.4],
+        type: 'GLB',
+      },
+    ],
+  },
+  {
+    name: '김동민',
+    decorationList: [
+      {
+        decorationType: 'TREE',
+        url: '/models/tree_4.glb',
         position: [0, 0.3, 0],
         scale: [0.3, 0.3, 0.3],
         rotate: [0, 0, 0],

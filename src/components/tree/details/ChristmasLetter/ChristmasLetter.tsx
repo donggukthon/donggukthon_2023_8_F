@@ -4,6 +4,7 @@ import { Image } from '@components/common/Image'
 import { Position } from '@components/common/Position'
 import { Row } from '@components/common/Row'
 import styled from '@emotion/styled'
+import { useLocalStorage } from '@hooks/useLocalStorage'
 import christmasLetterBackgroundImg from 'public/images/christmas_letter_background.png'
 import { FC } from 'react'
 
@@ -14,6 +15,9 @@ type ChristmasLetterProps = {
 }
 
 export const ChristmasLetter: FC<ChristmasLetterProps> = ({ className, name, content }) => {
+  const { value: cardMessageTitle } = useLocalStorage('card_message_title') as any
+  const { value: cardMessageContent } = useLocalStorage('card_message_content') as any
+
   return (
     <Column className={className}>
       <Position position={'relative'}>
@@ -27,13 +31,13 @@ export const ChristmasLetter: FC<ChristmasLetterProps> = ({ className, name, con
           />
           <Position position={'absolute'} top={28} left={35}>
             <StyledFont type={'heading-20-medium'} color={'gray.800'}>
-              {name} 님
+              {cardMessageTitle ?? name} 님
             </StyledFont>
           </Position>
           <Position position={'absolute'} top={70} left={30}>
             <Row width={240} height={100}>
               <StyledFont type={'heading-16-medium'} color={'gray.800'}>
-                {content}
+                {cardMessageContent ?? content}
               </StyledFont>
             </Row>
           </Position>
