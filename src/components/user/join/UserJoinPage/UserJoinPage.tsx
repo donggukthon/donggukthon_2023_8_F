@@ -1,4 +1,3 @@
-import { useGetHallListQuery } from '@apis/getHallList'
 import { usePostUserJoinMutation } from '@apis/postUserJoin'
 import { ContainedButton } from '@components/common/Button/ContainedButton'
 import { Column } from '@components/common/Column'
@@ -21,24 +20,24 @@ type UserJoinPageProps = {
 }
 
 export const UserJoinPage: FC<UserJoinPageProps> = ({ className }) => {
-  const { showAlarmToast } = useToast()
+  const { showAlarmToast, showFailToast } = useToast()
   // eslint-disable-next-line unused-imports/no-unused-vars
-  const { reload } = useRouter()
+  const { push } = useRouter()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [passwordConfirm, setPasswordConfirm] = useState<string>('')
   const [nickname, setNickname] = useState<string>('')
   const { mutate: userJoinMutate } = usePostUserJoinMutation({
     onSuccess: (e: any) => {
-      console.log({ e })
-    },
-    onError: (e: any) => {
-      console.log({ e })
+      if (e?.status === 'SUCCESS') {
+        alert('회원가입에 성공했습니다. 회원가입한 계정으로 로그인해주세요.')
+        push('/')
+      }
+      if (e?.status === 'FAILED') {
+        showFailToast({ message: '' })
+      }
     },
   })
-  const { data: hallListData } = useGetHallListQuery({ variables: {} })
-
-  console.log({ hallListData })
 
   const onClickSubmitButton = (event: any) => {
     event.preventDefault()
