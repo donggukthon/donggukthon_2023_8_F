@@ -40,7 +40,7 @@ const MENU_ITEM = [
   },
   {
     icon: drawerMenu3Img,
-    label: '기부하기',
+    label: '후원하기',
     link: '/donate',
   },
   // {

@@ -21,7 +21,7 @@ const DonatePage: NextPage<DonatePageProps> = () => (
     <Paper bgColor={'temp.#DACDC3'}>
       <Column maxWidth={[MOBILE_ROOT_MAX_WIDTH, '100%']} minHeight={`100vh`} pb={FOOTER_HEIGHT} mx={'auto'}>
         <MetaTags />
-        <Header title={'기부하기'} />
+        <Header title={'후원하기'} />
         <Space height={HEADER_HEIGHT} />
         <DonatePageComponent />
         <Footer />

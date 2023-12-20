@@ -76,7 +76,7 @@ export const BetaApplyPage: FC<BetaApplyPageProps> = ({ className }) => {
     }
 
     if (question3 === '') {
-      showAlarmToast({ message: '본인이 생각하는 적정 기부금의 액수를 입력해주세요.' })
+      showAlarmToast({ message: '본인이 생각하는 적정 후원금의 액수를 입력해주세요.' })
       return
     }
 
@@ -176,13 +176,13 @@ export const BetaApplyPage: FC<BetaApplyPageProps> = ({ className }) => {
               <CustomizePlayground />
               <Space height={[20, 40]} />
               <Font type={['heading-12-medium', 'heading-14-medium']} color={'gray.800'}>
-                무료로는 장식을 4개까지 사용할 수 있고 기부를 한다면 장식을 10개까지 사용할 수 있습니다. <br /> 위
-                서비스의 적정 비용(기부금)이라고 생각하는 비용을 입력해주세요. <br /> 현재는 약 2000원 정도로 책정하고
+                무료로는 장식을 4개까지 사용할 수 있고 후원를 한다면 장식을 10개까지 사용할 수 있습니다. <br /> 위
+                서비스의 적정 비용(후원금)이라고 생각하는 비용을 입력해주세요. <br /> 현재는 약 2000원 정도로 책정하고
                 있습니다.
               </Font>
               <Space height={10} />
               <ResponsiveTextInput
-                placeholder={'적정 비용(기부금)을 입력해주세요.'}
+                placeholder={'적정 비용(후원금)을 입력해주세요.'}
                 value={question3}
                 onChange={(e) => setQuestion3(e.target.value)}
                 name="question_3"

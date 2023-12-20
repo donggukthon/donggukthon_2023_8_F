@@ -1,6 +1,7 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { Column } from '@components/common/Column'
 import { Container } from '@components/common/Container'
+import { Font } from '@components/common/Font'
 import { Image } from '@components/common/Image'
 import { Paper } from '@components/common/Paper'
 import { Position } from '@components/common/Position'
@@ -12,6 +13,7 @@ import styled from '@emotion/styled'
 import { useLocalStorage } from '@hooks/useLocalStorage'
 import { useTreeDetailsPageUrlParam } from '@pages/tree/details/[treeId]'
 import { useRouter } from 'next/router'
+import donateButtonImg from 'public/images/donate_button.png'
 import editIconImg from 'public/images/edit_icon.png'
 import scanIconImg from 'public/images/scan_icon.png'
 import treeDetailsBackground3Img from 'public/images/tree_details_background_4.png'
@@ -36,6 +38,9 @@ export const TreeDetailsPage: FC<TreeDetailsPageProps> = ({ className }) => {
   }
   const onClickScanButton = () => {
     showAlarmToast({ message: '구현 중인 기능입니다.' })
+  }
+  const onClickDonateButton = () => {
+    push('/donate')
   }
 
   useEffect(() => {
@@ -84,6 +89,29 @@ export const TreeDetailsPage: FC<TreeDetailsPageProps> = ({ className }) => {
                   </Row>
                 </StyledButtonPaper>
               </Row>
+              <StyledColumn
+                width={'100%'}
+                justify={'center'}
+                mt={40}
+                p={10}
+                cursor={'pointer'}
+                onClick={onClickDonateButton}
+                gap={10}
+              >
+                <Image
+                  src={donateButtonImg}
+                  width={[250, 300]}
+                  height={[75, 90]}
+                  alt={'donate button image'}
+                  background={false}
+                  draggable={false}
+                />
+                <Row width={'100%'} justify={'center'}>
+                  <StyledFont type={['body-10-regular', 'btn-12-regular']} color={'gray.700'}>
+                    {`기부금은 전액 "사회연대은행"에 기부됩니다.`}
+                  </StyledFont>
+                </Row>
+              </StyledColumn>
             </Column>
           </StyledPaper>
         </Container>
@@ -97,6 +125,12 @@ const StyledPaper = styled(Paper)`
 `
 
 const StyledButtonPaper = styled(Paper)`
+  &&& {
+    z-index: 2;
+  }
+`
+
+const StyledColumn = styled(Column)`
   &&& {
     z-index: 2;
   }
@@ -122,4 +156,8 @@ const StyledImage = styled(Image)`
     object-fit: cover;
     margin-left: calc(-60%);
   }
+`
+
+const StyledFont = styled(Font)`
+  font-family: 'KingSejongInstitute';
 `

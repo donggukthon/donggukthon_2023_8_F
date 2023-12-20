@@ -24,7 +24,7 @@ const BetaApplyPage: NextPage<BetaApplyPageProps> = () => (
           ogTitle="나만의 3D 트리 베타테스터 모집"
           ogDescription="겨울철 소중한 경험에 함께 참여해주세요!"
           thumbnail="/images/beta_apply_thumbnail.png"
-          keywords={'나만의트리, 기부이벤트, 크리스마스, 크리스마스카드, 프로토타입, 사회문제'}
+          keywords={'나만의트리, 후원이벤트, 크리스마스, 크리스마스카드, 프로토타입, 사회문제'}
         />
         <BetaApplyPageComponent />
         <Footer />

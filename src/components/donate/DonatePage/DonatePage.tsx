@@ -21,6 +21,7 @@ type DonatePageProps = {
 
 export const DonatePage: FC<DonatePageProps> = ({ className }) => {
   const { showAlarmToast, showFailToast } = useToast()
+  // eslint-disable-next-line unused-imports/no-unused-vars
   const { reload } = useRouter()
   const [name, setName] = useState<string>('')
   const [phoneNumber, setPhoneNumber] = useState<string>('')
@@ -50,10 +51,10 @@ export const DonatePage: FC<DonatePageProps> = ({ className }) => {
 
     emailjs.sendForm('service_xhbaizn', 'template_hb4gh0j', event.target, '5ar0IfuRq5suk_xe4').then((res: any) => {
       if (res.status === 200) {
-        alert('기부 전송에 성공하였습니다. 기재된 계좌에 입금하시면 관리자 확인 후 승인 처리 됩니다.')
+        alert('후원 전송에 성공하였습니다. 기재된 계좌에 입금하시면 관리자 확인 후 승인 처리 됩니다.')
         // reload()
       } else {
-        showFailToast({ message: '기부 전송에 실패했습니다. 관리자에게 문의해주세요.' })
+        showFailToast({ message: '후원 전송에 실패했습니다. 관리자에게 문의해주세요.' })
       }
     })
   }
@@ -67,13 +68,13 @@ export const DonatePage: FC<DonatePageProps> = ({ className }) => {
               <Image src={wreathIconImg} alt={'wreath icon image'} width={80} height={80} background={false} />
               <Column align={'center'}>
                 <StyledFont type={['btn-14-bold', 'btn-16-regular']} color={'gray.800'} wordBreak={'keep-all'}>
-                  기부하기
+                  후원하기
                 </StyledFont>
               </Column>
               <Space height={30} />
               <Column width={320}>
                 <StyledFont type={['btn-12-regular', 'btn-14-regular']} color={'gray.800'} wordBreak={'keep-all'}>
-                  {`올해 나만의 3D 트리 수익금은 금융문제로 어려움을 겪는 이들을 돕는 "사회연대은행"에 기부합니다. `}
+                  {`올해 나만의 3D 트리 수익금은 금융문제로 어려움을 겪는 이들을 돕는 "사회연대은행"에 후원합니다. `}
                 </StyledFont>
                 <Space height={10} />
                 <StyledFont type={['btn-12-regular', 'btn-14-regular']} color={'gray.800'} wordBreak={'keep-all'}>
@@ -129,12 +130,12 @@ export const DonatePage: FC<DonatePageProps> = ({ className }) => {
                 <Column gap={5}>
                   <Row ml={5}>
                     <StyledFont type={['btn-12-bold', 'btn-14-bold']} color={'gray.800'}>
-                      기부 챌린지 지목 이메일 (선택)
+                      후원 챌린지 지목 이메일 (선택)
                     </StyledFont>
                   </Row>
                   <StyledTextInput
                     name={'send_email'}
-                    placeholder="기부 챌린지를 지목할 이메일을 입력해주세요."
+                    placeholder="후원 챌린지를 지목할 이메일을 입력해주세요."
                     value={sendEmail}
                     onChange={(e) => setSendEmail(e.target.value)}
                   />

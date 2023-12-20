@@ -18,7 +18,7 @@ const MainPage: NextPage<MainPageProps> = () => {
     <>
       <OrganizationSnippet />
       <BreadcrumbListSnippet breadcrumbs={[BREADCRUMBS.HOME]} />
-      <MetaTags title="나만의 3D 트리" description="3D 트리를 꾸미면서 기부를 해보세요!" />
+      <MetaTags title="나만의 3D 트리" description="3D 트리를 꾸미면서 후원를 해보세요!" />
       <Paper bgColor={'temp.#DACDC3'}>
         <MainPageComponent />
         <Space height={20} />
