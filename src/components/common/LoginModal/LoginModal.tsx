@@ -31,6 +31,11 @@ export const LoginModal: FC<LoginModalProps> = ({ className }) => {
     return
   }
 
+  const onClickJoinButton = () => {
+    push(`/user/join`)
+    return
+  }
+
   return (
     <Modal
       size="sm"
@@ -57,7 +62,7 @@ export const LoginModal: FC<LoginModalProps> = ({ className }) => {
             />
           </Column>
           <Space height={20} />
-          <Paper bgColor={'temp.#588C7E'} radius={8} width={'100%'}>
+          <Paper bgColor={'temp.#BC5952'} radius={8} width={'100%'}>
             <Row
               px={16}
               py={10}
@@ -69,6 +74,22 @@ export const LoginModal: FC<LoginModalProps> = ({ className }) => {
             >
               <StyledTitleFont type={['btn-12-medium', 'btn-14-medium']} color={'white'}>
                 로그인하기
+              </StyledTitleFont>
+            </Row>
+          </Paper>
+          <Space height={10} />
+          <Paper bgColor={'temp.#588C7E'} radius={8} width={'100%'}>
+            <Row
+              px={16}
+              py={10}
+              height={40}
+              justify={'center'}
+              align={'center'}
+              cursor={'pointer'}
+              onClick={onClickJoinButton}
+            >
+              <StyledTitleFont type={['btn-12-medium', 'btn-14-medium']} color={'white'}>
+                회원가입하기
               </StyledTitleFont>
             </Row>
           </Paper>

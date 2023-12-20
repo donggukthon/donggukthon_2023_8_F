@@ -1,14 +1,17 @@
 import { axiosPOST } from '@apis/base'
 import { AxiosRequestConfig } from 'axios'
 import { useMutation, UseMutationOptions } from 'react-query'
-import { MemberItemType } from 'types/common'
 import { StatusType } from 'types/status'
 
-export type PostUserJoinRequestType = Omit<MemberItemType, 'id' | 'createdAt' | 'isSubmitted'>
+export type PostUserJoinRequestType = {
+  email: string
+  password: string
+  name: string
+}
 
 export type PostUserJoinResponseType = {} & StatusType
 
-const postUserJoinMutationPath = (_param: PostUserJoinRequestType) => `/user/join.php`
+const postUserJoinMutationPath = (_param: PostUserJoinRequestType) => `/member/join`
 
 const postUserJoin = (params: PostUserJoinRequestType, config?: AxiosRequestConfig) => {
   return axiosPOST<PostUserJoinRequestType, PostUserJoinResponseType>(postUserJoinMutationPath(params), params, config)
