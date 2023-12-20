@@ -7,7 +7,9 @@ import { StatusType } from 'types/status'
 
 export type GetUserInfoRequestType = {}
 
-export type GetUserInfoResponseType = {} & StatusType & MemberItemType
+export type GetUserInfoResponseType = {
+  data: MemberItemType
+} & StatusType
 
 const getUserInfoQueryPath = (_param: GetUserInfoRequestType) => `/member/info`
 

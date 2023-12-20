@@ -3,6 +3,7 @@ import { Column } from '@components/common/Column'
 import styled from '@emotion/styled'
 import { useBooleanState } from '@hooks/useBooleanState'
 import { useLocalStorage } from '@hooks/useLocalStorage'
+import { useUserInfo } from '@hooks/useUserInfo'
 import { useRouter } from 'next/router'
 import { FC, useState } from 'react'
 import { Font } from '../Font'
@@ -23,11 +24,14 @@ export const LoginModal: FC<LoginModalProps> = ({ className }) => {
   const { push } = useRouter()
   const { showFailToast } = useToast()
   const { setItem: setItemTestToken } = useLocalStorage('token')
+
+  const { refetchGetUserInfo } = useUserInfo()
   const { mutate: userLoginMutate } = usePostUserLoginMutation({
     onSuccess: (e) => {
       if (e.status === 'SUCCESS') {
         setItemTestToken(e.data)
         closeModal()
+        refetchGetUserInfo()
       }
       if (e.status === 'FAILED') {
         showFailToast({ message: '로그인에 실패했습니다.' })

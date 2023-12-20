@@ -1,0 +1,1 @@
+export { TreeDetailsLegacyPage } from './TreeDetailsLegacyPage'

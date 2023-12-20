@@ -24,7 +24,7 @@ type TreeDetailsPageProps = {
   className?: string
 }
 
-export const TreeDetailsPage: FC<TreeDetailsPageProps> = ({ className }) => {
+export const TreeDetailsLegacyPage: FC<TreeDetailsPageProps> = ({ className }) => {
   const { state: isCaptureMode, setTrue: activateCaptureMode, setFalse: deactivateCaptureMode } = useBooleanState(false)
   const { push } = useRouter()
   const { showAlarmToast } = useToast()
