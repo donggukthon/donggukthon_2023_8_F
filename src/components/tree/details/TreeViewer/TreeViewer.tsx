@@ -1,6 +1,7 @@
 import { Column } from '@components/common/Column'
 import { Font } from '@components/common/Font'
 import { Image } from '@components/common/Image'
+import { MusicPlayer } from '@components/common/MusicPlayer'
 import { Paper } from '@components/common/Paper'
 import { Position } from '@components/common/Position'
 import { Row } from '@components/common/Row'
@@ -47,8 +48,6 @@ export const TreeViewer: FC<TreeViewerProps> = ({ className, treeList, treeId, i
     })
   }
 
-  console.log({ treeList })
-
   return (
     <Paper>
       <Column className={className}>
@@ -60,7 +59,10 @@ export const TreeViewer: FC<TreeViewerProps> = ({ className, treeList, treeId, i
                   <HighlightFontWrapper> {testTreeList[order].name}</HighlightFontWrapper> 님의 트리
                 </StyledFont>
               </Row>
-              <ChristmasLetterModal name={name} content={content} />
+              <Row align={'center'}>
+                <ChristmasLetterModal name={name} content={content} />
+                <MusicPlayer />
+              </Row>
             </>
           )}
         </Row>
@@ -79,17 +81,15 @@ export const TreeViewer: FC<TreeViewerProps> = ({ className, treeList, treeId, i
               {!isCaptureMode && (
                 <Position position={'absolute'} left={0} top={0}>
                   <StyledPaper>
-                    <Row justify={'center'} width={60} height={340}>
-                      <Row cursor={'pointer'} onClick={onClickPrevious}>
-                        <Image
-                          width={40}
-                          height={40}
-                          src={arrowCircleLeftIconImg}
-                          alt={'arrow circle left icon image'}
-                          background={false}
-                          draggable={false}
-                        />
-                      </Row>
+                    <Row justify={'center'} width={60} height={340} cursor={'pointer'} onClick={onClickPrevious}>
+                      <Image
+                        width={40}
+                        height={40}
+                        src={arrowCircleLeftIconImg}
+                        alt={'arrow circle left icon image'}
+                        background={false}
+                        draggable={false}
+                      />
                     </Row>
                   </StyledPaper>
                 </Position>
@@ -98,17 +98,15 @@ export const TreeViewer: FC<TreeViewerProps> = ({ className, treeList, treeId, i
               {!isCaptureMode && (
                 <Position position={'absolute'} right={0} top={0}>
                   <StyledPaper>
-                    <Row justify={'center'} width={60} height={340}>
-                      <Row cursor={'pointer'} onClick={onClickNext}>
-                        <Image
-                          width={40}
-                          height={40}
-                          src={arrowCircleRightIconImg}
-                          alt={'arrow circle right icon image'}
-                          background={false}
-                          draggable={false}
-                        />
-                      </Row>
+                    <Row justify={'center'} width={60} height={340} cursor={'pointer'} onClick={onClickNext}>
+                      <Image
+                        width={40}
+                        height={40}
+                        src={arrowCircleRightIconImg}
+                        alt={'arrow circle right icon image'}
+                        background={false}
+                        draggable={false}
+                      />
                     </Row>
                   </StyledPaper>
                 </Position>
