@@ -64,7 +64,7 @@ export const DonatePage: FC<DonatePageProps> = ({ className }) => {
       <Container size={'sm'}>
         <form onSubmit={onClickSubmitButton}>
           <StyledPaper minHeight={'100vh'}>
-            <Column align={'center'} gap={5} p={20}>
+            <Column align={'center'} gap={5} p={[15, 20]}>
               <Image src={wreathIconImg} alt={'wreath icon image'} width={80} height={80} background={false} />
               <Column align={'center'}>
                 <StyledFont type={['btn-14-bold', 'btn-16-regular']} color={'gray.800'} wordBreak={'keep-all'}>
@@ -72,7 +72,7 @@ export const DonatePage: FC<DonatePageProps> = ({ className }) => {
                 </StyledFont>
               </Column>
               <Space height={30} />
-              <Column width={320}>
+              <Column maxWidth={375} minWidth={280}>
                 <a href={'https://www.bss.or.kr/campaign/goodday23.html'} target={'_blank'} rel="noreferrer">
                   <StyledFont type={['btn-12-regular', 'btn-14-regular']} color={'gray.800'} wordBreak={'keep-all'}>
                     {`올해 나만의 3D 트리 수익금은 금융문제로 어려움을 겪는 이들을 돕는 "사회연대은행"에 후원합니다. `}
@@ -88,7 +88,7 @@ export const DonatePage: FC<DonatePageProps> = ({ className }) => {
                 </StyledFont>
               </Column>
               <Space height={30} />
-              <Column gap={25} width={320}>
+              <Column gap={25} width={'100%'} minWidth={280} maxWidth={375}>
                 <Column gap={5}>
                   <Row ml={5}>
                     <StyledFont type={['btn-12-bold', 'btn-14-bold']} color={'gray.800'}>
@@ -156,7 +156,7 @@ export const DonatePage: FC<DonatePageProps> = ({ className }) => {
                   />
                 </Column>
               </Column>
-              <Row mt={30}>
+              <Row mt={30} maxWidth={375} width={'100%'}>
                 <StyledContainedButton kind={'cta'} size={'lg'} type={'submit'}>
                   <StyledFont type={'btn-14-bold'} color={'white'}>
                     제출하기
@@ -187,8 +187,12 @@ const StyledTextArea = styled(TextArea)`
 `
 
 const StyledContainedButton = styled(ContainedButton)`
-  width: 320px;
-  background: #d7c8bd;
+  &&& {
+    width: 100%;
+    max-width: 375px;
+    min-width: 280px;
+    background: #d7c8bd;
+  }
 `
 
 const StyledFont = styled(Font)`

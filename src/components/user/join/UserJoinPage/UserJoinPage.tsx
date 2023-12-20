@@ -61,12 +61,16 @@ export const UserJoinPage: FC<UserJoinPageProps> = ({ className }) => {
     userJoinMutate({ email, password, name: nickname })
   }
 
+  const onClickTerms = () => {
+    window.open('/terms')
+  }
+
   return (
     <Column className={className}>
       <Container size={'sm'}>
         <form onSubmit={onClickSubmitButton}>
           <StyledPaper minHeight={'100vh'}>
-            <Column align={'center'} gap={5} p={20}>
+            <Column align={'center'} gap={5} p={[15, 20]}>
               <Image src={wreathIconImg} alt={'wreath icon image'} width={80} height={80} background={false} />
               <Column align={'center'}>
                 <StyledFont type={['btn-14-bold', 'btn-16-regular']} color={'gray.800'} wordBreak={'keep-all'}>
@@ -74,7 +78,7 @@ export const UserJoinPage: FC<UserJoinPageProps> = ({ className }) => {
                 </StyledFont>
               </Column>
               <Space height={30} />
-              <Column gap={25} width={320}>
+              <Column gap={25} width={'100%'} minWidth={280} maxWidth={375}>
                 <Column gap={5}>
                   <Row ml={5}>
                     <StyledFont type={['btn-12-bold', 'btn-14-bold']} color={'gray.800'}>
@@ -129,8 +133,13 @@ export const UserJoinPage: FC<UserJoinPageProps> = ({ className }) => {
                     onChange={(e) => setNickname(e.target.value)}
                   />
                 </Column>
+                <Row cursor={'pointer'} onClick={onClickTerms}>
+                  <StyledFont type={['body-10-regular', 'btn-12-regular']} color={'gray.700'}>
+                    개인정보처리방침
+                  </StyledFont>
+                </Row>
               </Column>
-              <Row mt={30}>
+              <Row mt={30} maxWidth={375} width={'100%'}>
                 <StyledContainedButton kind={'cta'} size={'lg'} type={'submit'}>
                   <StyledFont type={'btn-14-bold'} color={'white'}>
                     회원가입하기
@@ -161,8 +170,12 @@ const StyledTextArea = styled(TextArea)`
 `
 
 const StyledContainedButton = styled(ContainedButton)`
-  width: 320px;
-  background: #d7c8bd;
+  &&& {
+    width: 100%;
+    max-width: 375px;
+    min-width: 280px;
+    background: #d7c8bd;
+  }
 `
 
 const StyledFont = styled(Font)`

@@ -17,16 +17,16 @@ export const useUserInfo = (): useUserInfoType => {
     status,
   } = useGetUserInfoQuery({ variables: {} })
 
-  const userInfoData = data?.data
+  const userInfoData = data
 
   const _userInfo = status === 'success' ? userInfoData : undefined
 
-  const testInfo = {
-    id: 2,
-    name: '아마추어개발자',
-    email: 'ghkdwogud852@gmail.com',
-    createdAt: '2023-12-20T02:05:37',
-  }
+  // const testInfo = {
+  //   id: 2,
+  //   name: '아마추어개발자',
+  //   email: 'ghkdwogud852@gmail.com',
+  //   createdAt: '2023-12-20T02:05:37',
+  // }
 
-  return { userInfo: testInfo, isLoadingGetUserInfo, isFetchedGetUserInfo, refetchGetUserInfo }
+  return { userInfo: _userInfo, isLoadingGetUserInfo, isFetchedGetUserInfo, refetchGetUserInfo }
 }
