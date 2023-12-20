@@ -23,7 +23,7 @@ export const LoginModal: FC<LoginModalProps> = ({ className }) => {
   const { push } = useRouter()
   const { showFailToast } = useToast()
   const { setItem: setItemTestToken } = useLocalStorage('token')
-  const { mutate: userLoginMutate } = usePostUserLoginMutation({
+  const { mutate: _userLoginMutate } = usePostUserLoginMutation({
     onSuccess: (e) => {
       if (e.status === 'SUCCESS') {
         setItemTestToken(e.data)
@@ -41,7 +41,7 @@ export const LoginModal: FC<LoginModalProps> = ({ className }) => {
   const { state: isOpened, setFalse: closeModal, setTrue: openModal } = useBooleanState(false)
 
   const onClickLoginButton = () => {
-    userLoginMutate({ email, password })
+    // userLoginMutate({ email, password })
     push('/tree/details/1')
     return
   }
