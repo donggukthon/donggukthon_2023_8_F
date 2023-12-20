@@ -47,11 +47,7 @@ export const TreeViewer: FC<TreeViewerProps> = ({ className, treeList, treeId, i
     })
   }
 
-  // useEffect(() => {
-  //   if (isCaptureMode) {
-  //     deactivateAutoRotate()
-  //   }
-  // }, [isCaptureMode, deactivateAutoRotate])
+  console.log({ treeList })
 
   return (
     <Paper>

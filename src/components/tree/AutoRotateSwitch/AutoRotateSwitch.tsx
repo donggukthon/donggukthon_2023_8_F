@@ -27,9 +27,9 @@ export const AutoRotateSwitch: FC<AutoRotateSwitchProps> = ({
       px={10}
       cursor={'pointer'}
     >
-      <Font type={['heading-12-medium', 'heading-14-medium']} color={fontColor as any}>
+      <StyledTitleFont type={['heading-12-medium', 'heading-14-medium']} color={fontColor as any}>
         자동 회전
-      </Font>
+      </StyledTitleFont>
       <StyledSwitch checked={checked} size={'small'} />
     </Row>
   )
@@ -47,5 +47,12 @@ const StyledSwitch = styled(Switch)<StyledSwitchProps>`
     &&& {
       background: #3a4467;
     }
+  }
+`
+
+const StyledTitleFont = styled(Font)`
+  &&& {
+    font-family: 'KingSejongInstitute';
+    /* color: rgb(231, 173, 86); */
   }
 `
