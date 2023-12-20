@@ -1,5 +1,5 @@
 /* eslint-disable unused-imports/no-unused-vars */
-import { TEST_COLOR_LIST } from '../details/TreeDetailsPage/constants'
+import { TEST_COLOR_LIST } from '../TreeDetailsPage/constants'
 
 let randomColor = [...Array(4)].map(() => TEST_COLOR_LIST[Math.floor(Math.random() * TEST_COLOR_LIST.length)]) // 1층
 

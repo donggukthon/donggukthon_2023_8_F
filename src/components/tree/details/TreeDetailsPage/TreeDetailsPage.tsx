@@ -7,9 +7,10 @@ import { Paper } from '@components/common/Paper'
 import { Position } from '@components/common/Position'
 import { Row } from '@components/common/Row'
 import { useToast } from '@components/common/Toast'
-import { TreeViewer } from '@components/tree/TreeViewer'
-import { TREE_VIEWER_TEST_DATA } from '@components/tree/TreeViewer/constant'
+import { TreeViewer } from '@components/tree/details/TreeViewer'
+import { TREE_VIEWER_TEST_DATA } from '@components/tree/details/TreeViewer/constant'
 import styled from '@emotion/styled'
+import { useBooleanState } from '@hooks/useBooleanState'
 import { useLocalStorage } from '@hooks/useLocalStorage'
 import { useTreeDetailsPageUrlParam } from '@pages/tree/details/[treeId]'
 import { useRouter } from 'next/router'
@@ -24,6 +25,7 @@ type TreeDetailsPageProps = {
 }
 
 export const TreeDetailsPage: FC<TreeDetailsPageProps> = ({ className }) => {
+  const { state: isCaptureMode, setTrue: activateCaptureMode, setFalse: deactivateCaptureMode } = useBooleanState(false)
   const { push } = useRouter()
   const { showAlarmToast } = useToast()
   const { value: localTestTreeList, setItem: setItemTestTreeList } = useLocalStorage('test-tree-list')
@@ -37,7 +39,7 @@ export const TreeDetailsPage: FC<TreeDetailsPageProps> = ({ className }) => {
     push('/tree/customize')
   }
   const onClickScanButton = () => {
-    showAlarmToast({ message: '구현 중인 기능입니다.' })
+    activateCaptureMode()
   }
   const onClickDonateButton = () => {
     push('/donate')
@@ -69,52 +71,57 @@ export const TreeDetailsPage: FC<TreeDetailsPageProps> = ({ className }) => {
         <Container size={'sm'}>
           <StyledPaper>
             <Column style={{ zIndex: 2 }}>
-              {testTreeList && <TreeViewer treeList={testTreeList} treeId={+treeId} />}
-              <Row align={'center'} justify={'between'} mt={-50} mx={10}>
-                <StyledButtonPaper bgColor={'temp.#2d396855'} radius={30}>
-                  <Row p={10} cursor={'pointer'} onClick={onClickScanButton}>
-                    <Image src={scanIconImg} width={24} height={24} alt={'edit icon image'} background={false} />
-                  </Row>
-                </StyledButtonPaper>
-                <StyledButtonPaper bgColor={'temp.#2d396855'} radius={30}>
-                  <Row p={10} cursor={'pointer'} onClick={onClickCustomizeTreeButton}>
-                    <Image
-                      src={editIconImg}
-                      width={24}
-                      height={24}
-                      alt={'edit icon image'}
-                      background={false}
-                      draggable={false}
-                    />
-                  </Row>
-                </StyledButtonPaper>
-              </Row>
-              <StyledColumn
-                width={'100%'}
-                justify={'center'}
-                mt={50}
-                p={10}
-                cursor={'pointer'}
-                onClick={onClickDonateButton}
-                gap={10}
-              >
-                <Image
-                  src={donateButtonImg}
-                  width={[250, 300]}
-                  height={[75, 90]}
-                  alt={'donate button image'}
-                  background={false}
-                  draggable={false}
-                />
-                <Row width={'100%'} justify={'center'}>
-                  <StyledFont type={['body-10-regular', 'btn-12-regular']} color={'gray.700'}>
-                    {`서비스 수익금은 금융문제로 어려움을 겪는 이들을 돕는 "사회연대은행"에 기부합니다`}
-                  </StyledFont>
+              {testTreeList && <TreeViewer treeList={testTreeList} treeId={+treeId} isCaptureMode={isCaptureMode} />}
+              {!isCaptureMode && (
+                <Row align={'center'} justify={'between'} mt={-50} mx={10}>
+                  <StyledButtonPaper bgColor={'temp.#2d396855'} radius={30}>
+                    <Row p={10} cursor={'pointer'} onClick={onClickScanButton}>
+                      <Image src={scanIconImg} width={24} height={24} alt={'edit icon image'} background={false} />
+                    </Row>
+                  </StyledButtonPaper>
+                  <StyledButtonPaper bgColor={'temp.#2d396855'} radius={30}>
+                    <Row p={10} cursor={'pointer'} onClick={onClickCustomizeTreeButton}>
+                      <Image
+                        src={editIconImg}
+                        width={24}
+                        height={24}
+                        alt={'edit icon image'}
+                        background={false}
+                        draggable={false}
+                      />
+                    </Row>
+                  </StyledButtonPaper>
                 </Row>
-              </StyledColumn>
+              )}
+              {!isCaptureMode && (
+                <StyledColumn
+                  width={'100%'}
+                  justify={'center'}
+                  mt={50}
+                  p={10}
+                  cursor={'pointer'}
+                  onClick={onClickDonateButton}
+                  gap={10}
+                >
+                  <Image
+                    src={donateButtonImg}
+                    width={[250, 300]}
+                    height={[75, 90]}
+                    alt={'donate button image'}
+                    background={false}
+                    draggable={false}
+                  />
+                  <Row width={'100%'} justify={'center'}>
+                    <StyledFont type={['body-10-regular', 'btn-12-regular']} color={'gray.700'}>
+                      {`서비스 수익금은 금융문제로 어려움을 겪는 이들을 돕는 "사회연대은행"에 기부합니다`}
+                    </StyledFont>
+                  </Row>
+                </StyledColumn>
+              )}
             </Column>
           </StyledPaper>
         </Container>
+        {isCaptureMode && <StyledDeactivateCaptureRow cursor={'pointer'} onClick={deactivateCaptureMode} />}
       </Column>
     </Position>
   )
@@ -160,4 +167,13 @@ const StyledImage = styled(Image)`
 
 const StyledFont = styled(Font)`
   font-family: 'KingSejongInstitute';
+`
+
+const StyledDeactivateCaptureRow = styled(Row)`
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
 `

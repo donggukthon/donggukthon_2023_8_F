@@ -1,7 +1,7 @@
 import { Column } from '@components/common/Column'
 import { Container } from '@components/common/Container'
 import { Paper } from '@components/common/Paper'
-import { TREE_VIEWER_TEST_DATA } from '@components/tree/TreeViewer/constant'
+import { TREE_VIEWER_TEST_DATA } from '@components/tree/details/TreeViewer/constant'
 import { useLocalStorage } from '@hooks/useLocalStorage'
 import { FC, useEffect, useState } from 'react'
 import { TreeCustomizeEditor } from '../TreeCustomizeEditor'
