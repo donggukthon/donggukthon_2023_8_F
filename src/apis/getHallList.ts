@@ -14,7 +14,7 @@ export type GetHallListResponseType = {
   }[]
 } & StatusType
 
-const getHallListQueryPath = (_param: GetHallListRequestType) => `/hall/list.php`
+const getHallListQueryPath = (_param: GetHallListRequestType) => `/hall`
 
 const getHallList = (params: GetHallListRequestType, config?: AxiosRequestConfig) => {
   return axiosGET<GetHallListRequestType, GetHallListResponseType>(getHallListQueryPath(params), params, config)

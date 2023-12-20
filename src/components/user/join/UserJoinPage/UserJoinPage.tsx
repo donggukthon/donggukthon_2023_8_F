@@ -1,3 +1,4 @@
+import { useGetHallListQuery } from '@apis/getHallList'
 import { usePostUserJoinMutation } from '@apis/postUserJoin'
 import { ContainedButton } from '@components/common/Button/ContainedButton'
 import { Column } from '@components/common/Column'
@@ -20,7 +21,7 @@ type UserJoinPageProps = {
 }
 
 export const UserJoinPage: FC<UserJoinPageProps> = ({ className }) => {
-  const { showAlarmToast, showFailToast } = useToast()
+  const { showAlarmToast } = useToast()
   // eslint-disable-next-line unused-imports/no-unused-vars
   const { reload } = useRouter()
   const [email, setEmail] = useState<string>('')
@@ -31,7 +32,13 @@ export const UserJoinPage: FC<UserJoinPageProps> = ({ className }) => {
     onSuccess: (e: any) => {
       console.log({ e })
     },
+    onError: (e: any) => {
+      console.log({ e })
+    },
   })
+  const { data: hallListData } = useGetHallListQuery({ variables: {} })
+
+  console.log({ hallListData })
 
   const onClickSubmitButton = (event: any) => {
     event.preventDefault()

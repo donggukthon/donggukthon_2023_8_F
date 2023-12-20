@@ -1,5 +1,4 @@
 import { camelizeKey } from '@utils/camelizeKey'
-import { getCookie } from '@utils/cookies'
 import { decamelizeKey } from '@utils/decamelizeKey'
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import qs from 'qs'
@@ -74,9 +73,9 @@ export const axiosPOST = <RequestData, ResponseData>(url: string, data?: Request
     const storageAccessToken = JSON.parse(window.localStorage.getItem(ACCESS_TOKEN_KEY) as string)
     const washedAccessToken = storageAccessToken ? `Bearer ${storageAccessToken}` : undefined
     return axiosInstance
-      .post<ResponseData, AxiosResponse<ResponseData>, { csrfmiddlewaretoken: string }>(
+      .post<ResponseData, AxiosResponse<ResponseData>>(
         url,
-        { ...data, csrfmiddlewaretoken: getCookie('csrftoken') },
+        { ...data },
         {
           headers: {
             Authorization: washedAccessToken,
@@ -89,9 +88,9 @@ export const axiosPOST = <RequestData, ResponseData>(url: string, data?: Request
       })
   } catch {
     return axiosInstance
-      .post<ResponseData, AxiosResponse<ResponseData>, { csrfmiddlewaretoken: string }>(
+      .post<ResponseData, AxiosResponse<ResponseData>>(
         url,
-        { ...data, csrfmiddlewaretoken: getCookie('csrftoken') },
+        { ...data },
         {
           headers: {},
           ...options,
