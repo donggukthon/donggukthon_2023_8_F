@@ -36,7 +36,7 @@ export const MainPage: FC<MainPageProps> = ({ className }) => {
       showFailToast({ message: '유저 정보가 전달되지 않았습니다. 관리자에게 문의하세요.' })
       return
     }
-    push(`/tree/details/${userInfo.id}`)
+    push(`/tree/details/1`)
     return
   }
 

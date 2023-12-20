@@ -11,6 +11,7 @@ import { Space } from '@components/common/Space'
 import { useToast } from '@components/common/Toast'
 import emailjs from '@emailjs/browser'
 import styled from '@emotion/styled'
+import { useLocalStorage } from '@hooks/useLocalStorage'
 import { useRouter } from 'next/router'
 import wreathIconImg from 'public/images/wreath_icon.png'
 import { FC, useState } from 'react'
@@ -28,6 +29,10 @@ export const DonatePage: FC<DonatePageProps> = ({ className }) => {
   const [cardMessage, setCardMessage] = useState<string>('')
   const [sendEmail, setSendEmail] = useState<string>('')
   const [sendMessage, setSendMessage] = useState<string>('')
+  const { setItem: setItemCardMessageTitle, removeItem: removeItemCardMessageTitle } =
+    useLocalStorage('card_message_title')
+  const { setItem: setItemCardMessageContent, removeItem: removeItemCardMessageContent } =
+    useLocalStorage('card_message_content')
 
   const onClickSubmitButton = (event: any) => {
     event.preventDefault()
@@ -52,6 +57,10 @@ export const DonatePage: FC<DonatePageProps> = ({ className }) => {
     emailjs.sendForm('service_xhbaizn', 'template_hb4gh0j', event.target, '5ar0IfuRq5suk_xe4').then((res: any) => {
       if (res.status === 200) {
         alert('후원 전송에 성공하였습니다. 기재된 계좌에 입금하시면 관리자 확인 후 승인 처리 됩니다.')
+        removeItemCardMessageTitle()
+        removeItemCardMessageContent()
+        setItemCardMessageTitle(name)
+        setItemCardMessageContent(sendMessage)
         // reload()
       } else {
         showFailToast({ message: '후원 전송에 실패했습니다. 관리자에게 문의해주세요.' })
