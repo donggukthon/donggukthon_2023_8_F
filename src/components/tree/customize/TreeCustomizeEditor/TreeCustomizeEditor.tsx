@@ -1,3 +1,4 @@
+/* eslint-disable unused-imports/no-unused-vars */
 import { Border } from '@components/common/Border'
 import { ContainedButton } from '@components/common/Button/ContainedButton'
 import { Column } from '@components/common/Column'
@@ -50,7 +51,6 @@ const getPositionByFloorAndRadian = (floor: '1' | '2' | '3' | '4', radian: numbe
 type TreeCustomizeEditorProps = {
   className?: string
   testTreeList: any
-  userId: number
   onSubmit: (_value: any) => () => void
 }
 
@@ -250,22 +250,22 @@ const DECORATION_BUTTON_WIDTH = 60
 export const TreeCustomizeEditor: FC<TreeCustomizeEditorProps> = ({
   className,
   testTreeList: localTestTreeList,
-  userId,
   onSubmit,
 }) => {
   const { showAlarmToast, showSuccessToast } = useToast()
   const { state: autoRotate, toggleState: toggleAutoRotate } = useBooleanState(true)
   const [selectedDecorationIndex, setSelectedDecorationIndex] = useState<number>(0)
   const [selectedDecorationType, setSelectedDecorationType] = useState<DecorationTypeType>('TREE')
-  const [testTreeList, _setTestTreeList] = useState<TestTreeListType>([localTestTreeList[userId]])
-  const { push } = useRouter()
+  const [testTreeList, _setTestTreeList] = useState<TestTreeListType>([localTestTreeList[0]])
+  const { push, back } = useRouter()
+
   const onClickCancelButton = () => {
-    push('/tree/details/1')
+    back()
     return
   }
   const onClickCompleteButton = () => {
     onSubmit(testTreeList[0])()
-    push('/tree/details/1')
+    // push('/tree/details/1')
     showSuccessToast({ message: '저장이 완료되었습니다.' })
     return
   }

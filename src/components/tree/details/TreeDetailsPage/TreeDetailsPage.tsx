@@ -1,4 +1,6 @@
 /* eslint-disable unused-imports/no-unused-vars */
+import { useGetTreeDetailsQuery } from '@apis/getTreeDetails'
+import { usePostDecorationUpdateMutation } from '@apis/postDecorationUpdate'
 import { Column } from '@components/common/Column'
 import { Container } from '@components/common/Container'
 import { Font } from '@components/common/Font'
@@ -6,12 +8,9 @@ import { Image } from '@components/common/Image'
 import { Paper } from '@components/common/Paper'
 import { Position } from '@components/common/Position'
 import { Row } from '@components/common/Row'
-import { useToast } from '@components/common/Toast'
 import { TreeViewer } from '@components/tree/details/TreeViewer'
-import { TREE_VIEWER_TEST_DATA } from '@components/tree/details/TreeViewer/constant'
 import styled from '@emotion/styled'
 import { useBooleanState } from '@hooks/useBooleanState'
-import { useLocalStorage } from '@hooks/useLocalStorage'
 import { useTreeDetailsPageUrlParam } from '@pages/tree/details/[treeId]'
 import { useRouter } from 'next/router'
 import donateButtonImg from 'public/images/donate_button.png'
@@ -24,13 +23,25 @@ type TreeDetailsPageProps = {
   className?: string
 }
 
+export const DEFAULT_DECORATION_LIST_DATA = [
+  {
+    decorationType: 'TREE',
+    url: '/models/tree_2.glb',
+    position: [0, 0.3, 0],
+    scale: [0.3, 0.3, 0.3],
+    rotate: [0, 0, 0],
+    type: 'GLB',
+  },
+]
+
 export const TreeDetailsPage: FC<TreeDetailsPageProps> = ({ className }) => {
   const { state: isCaptureMode, setTrue: activateCaptureMode, setFalse: deactivateCaptureMode } = useBooleanState(false)
   const { push } = useRouter()
-  const { showAlarmToast } = useToast()
-  const { value: localTestTreeList, setItem: setItemTestTreeList } = useLocalStorage('test-tree-list')
+
   const [testTreeList, setTestTreeList] = useState<any>()
   const { treeId } = useTreeDetailsPageUrlParam()
+  const { mutate: decorationUpdateMutate } = usePostDecorationUpdateMutation({})
+  const { data: treeDetailsData } = useGetTreeDetailsQuery({ variables: { id: treeId } })
 
   const onClickCustomizeTreeButton = () => {
     push('/tree/customize')
@@ -43,13 +54,25 @@ export const TreeDetailsPage: FC<TreeDetailsPageProps> = ({ className }) => {
   }
 
   useEffect(() => {
-    if (!localTestTreeList) {
-      setItemTestTreeList(JSON.stringify(TREE_VIEWER_TEST_DATA))
-      setTestTreeList(TREE_VIEWER_TEST_DATA)
-    } else {
-      setTestTreeList(JSON.parse(localTestTreeList as string))
+    const treeDetailsName = treeDetailsData?.data?.name
+    const treeDetailsMetaData = treeDetailsData?.data?.meta
+
+    const metadata = {
+      name: treeDetailsName,
+      decorationList: DEFAULT_DECORATION_LIST_DATA,
     }
-  }, [localTestTreeList, setItemTestTreeList])
+
+    if (!treeDetailsMetaData) {
+      decorationUpdateMutate({ metadata: JSON.stringify(metadata) })
+      setTestTreeList([metadata])
+      return
+    }
+    if (treeDetailsMetaData) {
+      setTestTreeList([JSON.parse(treeDetailsMetaData)])
+      return
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Position position={'relative'}>

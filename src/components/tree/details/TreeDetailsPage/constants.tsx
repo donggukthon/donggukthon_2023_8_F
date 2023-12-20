@@ -37,22 +37,6 @@ export const TEST_TREE_LIST = () => {
       name: value,
       decorationList: [
         { color: randomColor[0], url: '/models/decoration_2.stl', position: [0, 0, 0.15], scale: [0.5, 0.5, 0.5] },
-        {
-          color: randomColor[1],
-          url: '/models/decoration_3.stl',
-          position: [0, 0.15, -0.2],
-          scale: [0.2, 0.2, 0.2],
-          rotate: [0.2, 0.3, 0.4],
-          type: 'STL',
-        },
-        {
-          color: randomColor[2],
-          url: '/models/decoration_4_1.glb',
-          position: [0, 0.2, -0.4],
-          scale: [0.1, 0.1, 0.1],
-          rotate: [0.2, 0.3, 0.4],
-          type: 'GLB',
-        },
       ],
     }
   })

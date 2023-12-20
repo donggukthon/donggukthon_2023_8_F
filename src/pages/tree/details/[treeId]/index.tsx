@@ -1,3 +1,4 @@
+import { prefetchGetTreeDetailsQuery } from '@apis/getTreeDetails'
 import { Column } from '@components/common/Column'
 import { Header } from '@components/common/Header'
 import { Paper } from '@components/common/Paper'
@@ -8,11 +9,12 @@ import { HEADER_HEIGHT, MOBILE_ROOT_MAX_WIDTH } from '@constants/layout'
 import { useUrlParam } from '@hooks/useUrlParam'
 import { MetaTags } from '@libs/seo'
 import { getUrl } from '@utils/getUrl'
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
+import { dehydrate, DehydratedState, QueryClient } from 'react-query'
 
 const TreeDetailsPagePath = '/tree/details/[treeId]'
 
-type TreeDetailsPageProps = {}
+type TreeDetailsPageProps = { treeId: string }
 
 export const getTreeDetailsPageUrl = (params: TreeDetailsPageProps) =>
   getUrl<TreeDetailsPageProps>(TreeDetailsPagePath, params)
@@ -31,9 +33,43 @@ const TreeDetailsPage: NextPage<TreeDetailsPageProps> = () => (
 )
 
 export const useTreeDetailsPageUrlParam = () => {
-  const treeId = useUrlParam('treeId', '')[0]
+  const paramTreeId = useUrlParam('treeId', '')[0]
 
+  const treeId = (() => {
+    if (!paramTreeId) {
+      return 0
+    }
+    if (typeof +paramTreeId !== 'number') {
+      return 0
+    }
+    return +paramTreeId
+  })()
   return { treeId }
 }
+
+export const getServerSideProps: GetServerSideProps<{ dehydratedState: DehydratedState }, TreeDetailsPageProps> =
+  async (context) => {
+    const queryClient = new QueryClient()
+
+    const treeId = (() => {
+      if (!context.params?.treeId) {
+        return 0
+      }
+      if (typeof +context.params?.treeId !== 'number') {
+        return 0
+      }
+      return +context.params?.treeId
+    })()
+
+    await prefetchGetTreeDetailsQuery(queryClient, {
+      id: treeId,
+    })
+
+    return {
+      props: {
+        dehydratedState: dehydrate(queryClient),
+      },
+    }
+  }
 
 export default TreeDetailsPage

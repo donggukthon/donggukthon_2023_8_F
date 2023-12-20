@@ -22,11 +22,11 @@ type TreeViewerProps = {
   isCaptureMode: boolean
 }
 
-export const TreeViewer: FC<TreeViewerProps> = ({ className, treeList, treeId, isCaptureMode }) => {
+export const TreeViewer: FC<TreeViewerProps> = ({ className, treeList, treeId: _treeId, isCaptureMode }) => {
   const [name, _setName] = useState('테스트')
   const [content, _setContent] = useState('테스트입니다 테스트입니다')
   const { state: autoRotate, toggleState: toggleAutoRotate, setFalse: _deactivateAutoRotate } = useBooleanState(true)
-  const [order, setOrder] = useState<number>(+treeId)
+  const [order, setOrder] = useState<number>(0)
   const { value } = useIncrementalValue(order, 300)
 
   const testTreeList = treeList
